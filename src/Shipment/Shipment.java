@@ -54,5 +54,15 @@ public class Shipment implements Shipable {
 	public int getOrderID(){
 		return order.getOrderID();
 	}
+	
+	public Order getOrder()
+    {
+        return order;
+    }
+	
+    public void setOrder(Order order)
+    {
+        this.order = order;
+    }
 
 }
