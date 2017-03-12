@@ -4,6 +4,7 @@ public class ScrapReport extends Report{
 
 	public ScrapReport(){
 		this.reportName="Scrap Report";
+		System.out.println("Scrap Information");
 	}
 	
 	@Override

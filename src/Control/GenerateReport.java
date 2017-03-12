@@ -16,6 +16,7 @@ public class GenerateReport {
 	public GenerateReport(){
 		getReportFromUser();
 		runReport();
+		
 	}
 	
 	public void getReportFromUser(){
@@ -26,7 +27,6 @@ public class GenerateReport {
 		System.out.println("3.Scrap Report");
 		System.out.println("4.Inventory Report");
 		reportID=Integer.parseInt(in.nextLine());
-		in.close();
 		
 		switch(reportID){
 			case 1:report=new EmployeeReport(); break;
@@ -34,6 +34,7 @@ public class GenerateReport {
 			case 3:report=new ScrapReport(); break;
 			case 4:report=new InventoryReport(); break;
 		}
+		in.close();
 	}
 	
 	public void runReport(){
@@ -43,6 +44,10 @@ public class GenerateReport {
 	}
 	
 	public void queryDatabase(String reportName, String query){
-		
+		reportOutput();
+	}
+	
+	public void reportOutput(){
+		System.out.println("Result set from database");
 	}
 }
