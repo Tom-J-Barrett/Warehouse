@@ -5,11 +5,10 @@ public class Item{
 	private String itemName;
 	private int itemID;
 	
-	Item(){
-	
+	public Item(){
 	}
 	
-	Item(String itemName, int itemID){
+	public Item(String itemName, int itemID){
 		this.itemName=itemName;
 		this.itemID=itemID;
 	}
@@ -24,6 +23,11 @@ public class Item{
 	
 	public int getItemID(){
 		return itemID;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [itemName=" + itemName + ", itemID=" + itemID + "]";
 	}
 
 }
