@@ -7,11 +7,11 @@ public class Product{
 	private String productName;
 	private int productID;
 	
-	Product(){
+	public Product(){
 		
 	}
 	
-	Product(ArrayList<Item> items, String productName, int productID){
+	public Product(ArrayList<Item> items, String productName, int productID){
 		this.items=items;
 		this.productName=productName;
 		this.productID=productID;
