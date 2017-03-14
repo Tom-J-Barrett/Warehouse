@@ -1,10 +1,9 @@
-import Control.Ship;
-import Control.LogIn;
-import Control.AddNewProduct;
-
 import java.util.Scanner;
 
-import Control.GenerateReport;
+import control.AddNewProduct;
+import control.GenerateReport;
+import control.LogIn;
+import control.Ship;
 
 public class IntelligentWarehouse {
 
