@@ -49,7 +49,7 @@ public class AddNewProduct {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Please enter name of new product: ");
 		productName = sc.nextLine();
-		sc.close();
+		
 	}
 
 	public void displayItems(){
@@ -64,7 +64,7 @@ public class AddNewProduct {
 			Scanner sc=new Scanner(System.in);
 			System.out.println("Please select itemID "+i+" : ");
 			itemID=Integer.parseInt(sc.nextLine());
-			sc.close();
+		//	sc.close();
 			for (Item item : items) {
 				if (itemID == item.getItemID()){
 					productItems.add(item);
@@ -78,7 +78,7 @@ public class AddNewProduct {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Choose a ID");
 		productID = sc.nextInt();		
-		sc.close();
+	//	sc.close();
 		//to change for auto incrementation from db
 	}
 
