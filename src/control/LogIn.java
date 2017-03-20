@@ -1,6 +1,6 @@
 package control;
 
-import com.sun.javafx.image.BytePixelSetter;
+//import com.sun.javafx.image.BytePixelSetter;
 import employee.Employee;
 import employee.Manager;
 import employee.Operator;
