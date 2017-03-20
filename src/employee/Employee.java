@@ -2,6 +2,7 @@ package employee;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Employee
@@ -69,9 +70,12 @@ public class Employee
     {
         return role;
     }
-    public List<String> menu()
+    public LinkedHashMap<Integer, List<String>> menu()
     {
-        return new ArrayList<>(Arrays.asList("1. Log Out", "2. Exit"));
+        LinkedHashMap<Integer, List<String>> menuItems = new LinkedHashMap<>();
+        menuItems.put(1, new ArrayList<>(Arrays.asList("1. Log Out", "Log Out Menu Item Selected")));
+        menuItems.put(2, new ArrayList<>(Arrays.asList("2. Exit", "Exit Menu Item Selected")));
+        return menuItems;
     }
 }
 
