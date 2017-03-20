@@ -28,7 +28,7 @@ public class IntelligentWarehouse {
 			
 			switch(choice){
 			case 1:GenerateReport report=new GenerateReport();break;
-			case 2:Ship ship=new Ship();break;
+			case 2:Ship ship=new Ship(db);break;
 			case 3:LogIn login= new LogIn();break;
 			case 4:AddNewProduct product=new AddNewProduct();break;
 			case 5:ReceiveInventory recInv=new ReceiveInventory(db);break;

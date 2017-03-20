@@ -11,7 +11,7 @@ public class Database
     private String jdbcDriver = "com.mysql.jdbc.Driver";
     private String databaseUrl = "jdbc:mysql://localhost:3306/Warehouse";
     private String user = "root";
-    private String password = "root";
+    private String password = "aicahsah";
     private String databaseTitle = "Warehouse";
     public Database()
     {
@@ -68,8 +68,9 @@ public class Database
             Connection connection = DriverManager.getConnection(databaseUrl, user, password);
             Statement currentStatement = connection.createStatement();
             StringBuilder sqlStatement = new StringBuilder("select ");
-            if(columnTitles.size() == 0)
-                sqlStatement.append("*");
+            if(columnTitles.size() == 0){
+            	sqlStatement.append("*");
+            }    
             else
             {
                 columnTitles.forEach(x -> sqlStatement.append(x + ", "));
@@ -79,6 +80,7 @@ public class Database
             addParametersToSQLStatement(selectedParameters, sqlStatement);
             if(columnTitleForSorting.length() > 0)
                 sqlStatement.append(" order by " + columnTitleForSorting + " asc");
+            System.out.println(sqlStatement.toString());
             ArrayList<ArrayList<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
             currentStatement.close();
             connection.close();
@@ -157,7 +159,7 @@ public class Database
                 else
                     preparedStatement.setString(counter, tableRowValues.get(counter - 1));
             }
-            System.out.println(preparedStatement);
+         //   System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
