@@ -1,13 +1,6 @@
 package control;
-
-import com.sun.javafx.image.BytePixelSetter;
-import employee.Employee;
-import employee.Manager;
-import employee.Operator;
-import employee.WHWorker;
-
+import employee.*;
 import java.util.Scanner;
-
 public class LogIn
 {
     public LogIn()
@@ -25,10 +18,8 @@ public class LogIn
         String username = aScanner.nextLine();
         System.out.println("Your Password Goes Here");
         String password = aScanner.nextLine();
-        aScanner.close();
         if(username.length() > 2 && password.length() > 2)
         {
-            System.out.println("You have been logged in successfully as " + username);
             if(username.startsWith("o") || username.startsWith("O"))
                 createMenuForOperator(username, password);
             else if(username.startsWith("w") || username.startsWith("W"))
@@ -48,14 +39,12 @@ public class LogIn
     }
     private void createMenuForOperator(String username, String password)
     {
-        System.out.println("You have been logged in as an operator");
         Operator anOperator = new Operator();
         anOperator.setUsername(username);
         anOperator.setPassword(password);
         anOperator.menu().values().forEach(x -> System.out.println(x.get(0)));
-        Scanner aScanner = new Scanner(System.in);
-        int selectedMenuOption = aScanner.nextInt();
-        aScanner.close();
+    	Scanner aScanner = new Scanner(System.in);
+    	int selectedMenuOption = aScanner.nextInt();
         if(selectedMenuOption >= 1 && selectedMenuOption <= 3)
         {
             System.out.println(anOperator.menu().get(selectedMenuOption).get(1));
@@ -73,14 +62,12 @@ public class LogIn
     }
     private void createMenuForWarehouseWorker(String username, String password)
     {
-        System.out.println("You have been logged in as a warehouse worker");
         WHWorker aWarehouseWorker = new WHWorker();
         aWarehouseWorker.setUsername(username);
         aWarehouseWorker.setPassword(password);
         aWarehouseWorker.menu().values().forEach(x -> System.out.println(x.get(0)));
         Scanner aScanner = new Scanner(System.in);
         int selectedMenuOption = aScanner.nextInt();
-        aScanner.close();
         if(selectedMenuOption >= 1 && selectedMenuOption <= 6)
         {
             System.out.println(aWarehouseWorker.menu().get(selectedMenuOption).get(1));
@@ -98,14 +85,12 @@ public class LogIn
     }
     private void createMenuForManager(String username, String password)
     {
-        System.out.println("You have been logged in as a manager");
         Manager aManager = new Manager();
         aManager.setUsername(username);
         aManager.setPassword(password);
         aManager.menu().values().forEach(x -> System.out.println(x.get(0)));
         Scanner aScanner = new Scanner(System.in);
         int selectedMenuOption = aScanner.nextInt();
-        aScanner.close();
         if(selectedMenuOption >= 1 && selectedMenuOption <= 7)
         {
             System.out.println(aManager.menu().get(selectedMenuOption).get(1));
