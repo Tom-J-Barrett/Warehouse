@@ -72,11 +72,13 @@ public class Scrap {
 		System.out.println("Please select an order to scrap :");
 		Scanner sc=new Scanner(System.in);
 		int orderID=Integer.parseInt(sc.nextLine());
-		for (Order order : orders) {
+		
+	for(Iterator<Order> it = orders.iterator(); it.hasNext();){
+			Order order = it.next();
 			if(orderID == order.getOrderID()){
 				scrapOrders.add(order);
-				orders.remove(order);
-			}
+				it.remove();
+			}	
 		}
 		
 		System.out.println("Orders : ");
