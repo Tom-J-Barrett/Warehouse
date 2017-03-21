@@ -24,6 +24,25 @@ public class Database
             JOptionPane.showMessageDialog(null, error);
         }
     }
+    /*
+    This method is difficult to use as it takes a lot of parameters. The first 2 parameters are essential. The last 3 parameters are not necessary as they just filter
+    and refine the data.
+    This method creates a join statement to retrieve data from 2 or more tables. The tableTitles parameter is for the titles of the tables. The joinConditions parameters
+    is for the join conditions that join the tables together. The selectedParameters is for the filters that are applied to the SQL statement. If the selectedParameters
+    is set to an empty HashMap all rows of the selected tables of the database will be returned. The columnTitles is for the selected columns from the selected tables.
+    If the columnTitles is set to an empty ArrayList all columns from the selected tables will be returned. If the columnTitleForSorting parameter is initialised with a
+    string variable with a length greater than zero the results are sorted in ascending order by the specified column title.
+
+    Sample Usage
+    Database aDatabase = new Database();
+    ArrayList<String> tableTitles = new ArrayList<>(Arrays.asList("firstweights", "drivers"));
+    ArrayList<String> joinConditions = new ArrayList<>(Arrays.asList("firstweights.driver", "drivers.code"));
+    HashMap<String, String> selectedValues = new HashMap<>();
+    selectedValues.put("drivers.code", "2");
+    ArrayList<String> desiredColumns = new ArrayList<>(Arrays.asList("firstweights.code", "firstweights.weight", "firstweights.date", "drivers.firstname",
+    "drivers.lastname"));
+    ArrayList<ArrayList<String>> retrievedTableRows = aDatabase.getJoinedTableRows(tableTitles, joinConditions, selectedValues, desiredColumns, "");
+    */
     public ArrayList<ArrayList<String>> getJoinedTableRows(ArrayList<String> tableTitles, ArrayList<String> joinConditions,
                                                            HashMap<String, String> selectedParameters, ArrayList<String> columnTitles, String columnTitleForSorting)
     {
@@ -60,6 +79,21 @@ public class Database
             return new ArrayList<>();
         }
     }
+    /*
+    This method is utilised for getting data from a single table in the database. It is easier to use than the previous method. The first parameter called tableName is
+    essential whereas the other 3 parameters are utilised for filtering and sorting the rows. The parameter tableName is used to specify the name of the table in the
+    database. The parameter selectedParameters is used to filter the selected rows based on the selected criteria. If the selectedParameters is set to an empty HashMap
+    all data in the table will be returned. The parameter columnTitles is used to select columns from the table. If the parameter contains no elements all the columns in
+    the table will be returned. The parameter columnTitleForSorting is utilised to order data in ascending order in the table based on the selected column title. If the
+    parameter columnTitleForSorting has a length of 0 no ordering will occur.
+
+    Sample Usage
+    Database aDatabase = new Database();
+    HashMap<String, String> selectedValues = new HashMap<>();
+    selectedValues.put("drivers.code", "2");
+    ArrayList<String> desiredColumns = new ArrayList<>(Arrays.asList("drivers.firstname", "drivers.lastname"));
+    ArrayList<ArrayList<String>> retrievedTableRows = aDatabase.getTableRows("drivers", selectedValues, desiredColumns, "");
+    */
     public ArrayList<ArrayList<String>> getTableRows(String tableName, HashMap<String, String> selectedParameters, ArrayList<String> columnTitles,
                                                      String columnTitleForSorting)
     {
@@ -92,6 +126,15 @@ public class Database
             return new ArrayList<>();
         }
     }
+    /*
+    This method is very easy to utilise. This method is utilised to get the max value of a specified column from a specified table. It takes two parameters
+    which are both required. The parameter tableName is required for the name of the desired table of the database. The parameter columnName is required for the
+    name of the desired column of the table.
+
+    Sample Usage
+    Database aDatabase = new Database();
+    int maximumValueOfColumn = aDatabase.getMaxValueOfColumn("drivers", "code");
+    */
     public int getMaxValueOfColumn(String tableName, String columnName)
     {
         try
@@ -113,6 +156,14 @@ public class Database
             return -1;
         }
     }
+    /*
+    This method is very easy to utilise. It takes just one parameter which is the name of the table. It returns an ArrayList which contains the column titles of the
+    specified table.
+
+    Sample Usage
+    Database aDatabase = new Database();
+    ArrayList<String> columnTitlesOfDriversTable = aDatabase.getColumnTitles("drivers");
+    */
     public ArrayList<String> getColumnTitles(String tableName)
     {
         try
@@ -139,6 +190,15 @@ public class Database
             return new ArrayList<>();
         }
     }
+    /*
+    This method is very easy to utilise. This method is utilised to insert a new row into the specified table of the database. It takes just 2 parameters.
+    Both parameters are necessary. The first parameter is the name of the table and the second parameter is an ArrayList containing the values of the row to be inserted.
+
+    Sample Usage
+    Database aDatabase = new Database();
+    ArrayList<String> newRowValues = new ArrayList<>(Arrays.asList("5", "Shane", "Collins"));
+    aDatabase.insertTableRow("drivers", newRowValues);
+    */
     public void insertTableRow(String tableName, ArrayList<String> tableRowValues)
     {
         try
@@ -169,6 +229,18 @@ public class Database
             JOptionPane.showMessageDialog(null, error);
         }
     }
+    /*
+    This method is very easy to utilise. This method is used to delete rows from the specified table in the database. It takes 2 parameters both of which are necessary.
+    The first parameter is the name of the table. This parameter is required. The second parameter is required to filter the rows of the table.
+    If no value is supplied to the second parameter all the rows in the table will be deleted. Therefore it is extremely important to add a value to the
+    selectedParameters HashMap.
+
+    Sample Usage
+    Database aDatabase = new Database();
+    HashMap<String, String> selectedParameters = new HashMap<>();
+    selectedParameters.put("code", "2");
+    aDatabase.removeTableRow("drivers", selectedParameters);
+    */
     public void removeTableRow(String tableName, HashMap<String, String> selectedParameters)
     {
         try
@@ -186,6 +258,20 @@ public class Database
             JOptionPane.showMessageDialog(null, error, "Error Message", JOptionPane.ERROR_MESSAGE);
         }
     }
+    /*
+    This method is a little harder to utilise. It is used to update the selected attributes of a selected row in a selected table in the database.
+    This method takes 3 parameters which are all necessary. The first parameter is the name of the table. The second parameter is a HashMap which is used to specify the
+    name of the attribute to be updated and the updated value of that attribute. The third parameter is a HashMap which is used to specify the row that is to be updated.
+    If the third parameter does not contain a value, all the rows in the selected table will be updated to the updated values.
+
+    Sample Usage
+    Database aDatabase = new Database();
+    HashMap<String, String> updatedParameters = new HashMap<>();
+    updatedParameters.put("firstname", "Shane");
+    HashMap<String, String> selectedParameters = new HashMap<>();
+    selectedParameters.put("code", "2");
+    aDatabase.updateTableRow("drivers", updatedParameters, selectedParameters);
+    */
     public void updateTableRow(String tableName, HashMap<String, String> updatedParameters, HashMap<String, String> selectedParameters)
     {
         try
