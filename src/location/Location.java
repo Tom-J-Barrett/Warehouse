@@ -5,7 +5,6 @@ public class Location {
 	private String locationType;
 	
 	public Location(){
-		System.out.println("Location");
 	}
 	
 	public int getLocationID(){
