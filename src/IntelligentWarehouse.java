@@ -1,10 +1,6 @@
 import java.util.Scanner;
 
-import control.AddNewProduct;
-import control.GenerateReport;
-import control.LogIn;
-import control.Ship;
-import control.Scrap;
+import control.*;
 
 public class IntelligentWarehouse {
 

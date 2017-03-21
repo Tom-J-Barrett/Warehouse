@@ -10,7 +10,7 @@ public class LogIn
     public void attemptLogOn(String errorMessage)
     {
         if(errorMessage.length() == 0)
-            System.out.println("Please enter your username and password");
+            System.out.println("Please enter your valid username and password");
         else
             System.out.println(errorMessage);
         System.out.println("Your Username Goes Here");
