@@ -73,7 +73,7 @@ public class Scrap {
 		Scanner sc=new Scanner(System.in);
 		int orderID=Integer.parseInt(sc.nextLine());
 		
-	for(Iterator<Order> it = orders.iterator(); it.hasNext();){
+		for(Iterator<Order> it = orders.iterator(); it.hasNext();){
 			Order order = it.next();
 			if(orderID == order.getOrderID()){
 				scrapOrders.add(order);
