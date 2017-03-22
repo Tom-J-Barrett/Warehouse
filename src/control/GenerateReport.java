@@ -6,12 +6,14 @@ import report.InventoryReport;
 import report.ProductReport;
 import report.Report;
 import report.ScrapReport;
+import control.OrderOnQueueReportControl;
 
 public class GenerateReport {
 	private Report report;
 	private String reportName;
 	private int reportID;
 	private String query;
+	private OrderOnQueueReportControl orderReport;
 	
 	public GenerateReport(){
 		getReportFromUser();
@@ -26,6 +28,7 @@ public class GenerateReport {
 		System.out.println("2.Product Report");
 		System.out.println("3.Scrap Report");
 		System.out.println("4.Inventory Report");
+		System.out.println("Orders to be processed Report");
 		reportID=Integer.parseInt(in.nextLine());
 		
 		switch(reportID){
@@ -33,6 +36,7 @@ public class GenerateReport {
 			case 2:report=new ProductReport(); break;
 			case 3:report=new ScrapReport(); break;
 			case 4:report=new InventoryReport(); break;
+			case 5:orderReport=new OrderOnQueueReportControl(); break;
 		}
 		in.close();
 	}
