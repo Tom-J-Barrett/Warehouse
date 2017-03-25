@@ -17,7 +17,7 @@ public class GenerateReport {
 	
 	public GenerateReport(){
 		getReportFromUser();
-		runReport();
+		//runReport();
 		
 	}
 	
@@ -28,7 +28,7 @@ public class GenerateReport {
 		System.out.println("2.Product Report");
 		System.out.println("3.Scrap Report");
 		System.out.println("4.Inventory Report");
-		System.out.println("Orders to be processed Report");
+		System.out.println("5.Orders to be processed Report");
 		reportID=Integer.parseInt(in.nextLine());
 		
 		switch(reportID){
@@ -42,9 +42,9 @@ public class GenerateReport {
 	}
 	
 	public void runReport(){
-		reportName=report.getName();
-		query=report.generateReport();
-		queryDatabase(reportName,query);
+		//reportName=report.getName();
+		//query=report.generateReport();
+		//queryDatabase(reportName,query);
 	}
 	
 	public void queryDatabase(String reportName, String query){

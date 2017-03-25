@@ -23,23 +23,23 @@ public class Ship {
 	private Item itemForOrder;
 	private Product productForOrder;
 	
-	private ArrayList<Item> items;
+	private List<Item> items;
 	private List<Product> products;
 	private Database db;
 	private HashMap<String, String> selectedParameters;
-	private ArrayList<String> columnTitles;
+	private List<String> columnTitles;
 	private String columnTitleForSorting;
 	private HashMap<String, String> selectedParameters2;
-	private ArrayList<String> columnTitles2;
+	private List<String> columnTitles2;
 	private String columnTitleForSorting2;
 	private HashMap<String, String> selectedParameters3;
-	private ArrayList<String> columnTitles3;
+	private List<String> columnTitles3;
 	private String columnTitleForSorting3;
-	private ArrayList<ArrayList<String>> listOfOrdersToShip;
-	private ArrayList<ArrayList<String>> listOfProducts;
-	private ArrayList<ArrayList<String>> listOfItems;
+	private List<List<String>> listOfOrdersToShip;
+	private List<List<String>> listOfProducts;
+	private List<List<String>> listOfItems;
 	
-	private ArrayList<String> shipvalues;
+	private List<String> shipvalues;
 	
 	public Ship(Database db){
 		this.db=db;

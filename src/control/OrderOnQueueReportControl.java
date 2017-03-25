@@ -39,7 +39,7 @@ public class OrderOnQueueReportControl {
 	private ArrayList<String> columnTitlesItem;
 	private String columnTitleForSortingItem;
 	
-	private HashMap<String, String> selectedParametersItemInventory;
+	private HashMap<String, String> selectedParametersInventory;
 	private ArrayList<String> columnTitlesInventory;
 	private String columnTitleForSortingInventory;
 	
@@ -47,78 +47,88 @@ public class OrderOnQueueReportControl {
 	private List<List<String>> listOfProducts;
 	private List<List<String>> listOfItems;
 	private List<List<String>> inventoryList;
+	private Item item;
+	private Product product;
+	private Order order;
+	private Inventory inven;
+	
 	
 	OrderOnQueueReportControl(){
-		//report=new OrdersOnQueueBuilder().
+		//report=new OrdersOnQueueBuilder();
 	}
 	
-	/*public void createItems(){
+public void createItems(){
 		items=new ArrayList<Item>();
 		int id=Integer.parseInt(listOfItems.get(0).get(0));
 		String name=listOfItems.get(0).get(1);
-		itemForOrder=new Item(name,id);
-		items.add(itemForOrder);
+		item=new Item(name,id);
+		items.add(item);
 	}
 	
 	public void createProduct(){
 		products=new ArrayList<Product>();
 		String name=listOfProducts.get(0).get(2);
 		int id=Integer.parseInt(listOfProducts.get(0).get(0));
-		productForOrder=new Product(items,name,id);
-		products.add(productForOrder);
+		product=new Product(items,name,id);
+		products.add(product);
 	}
 	
 	public void createOrder(){
-		int id=Integer.parseInt(listOfOrdersToShip.get(0).get(0));
-		String shipTo="Address";
-		orderToShip=new Order(products,id,shipTo);
+		orders=new ArrayList<Order>();
+		String name=listOfOrders.get(0).get(2);
+		String shipTo="";
+		int id=Integer.parseInt(listOfOrders.get(0).get(0));
+		order=new Order(products,id,shipTo);
+		orders.add(order);
 	}
 	
 	public void createInventory(){
-		int id=Integer.parseInt(listOfOrdersToShip.get(0).get(0));
-		String shipTo="Address";
-		orderToShip=new Order(products,id,shipTo);
+		inventory=new ArrayList<Inventory>();
+		String name=inventoryList.get(0).get(2);
+		int id=Integer.parseInt(inventoryList.get(0).get(0));
+		inven=new Inventory(item,location);
+		inventory.add(inven);
 	}
 	
 	public void getOrders(){
 		locationID=location.getLocationID();
 
-		columnTitles=new ArrayList<String>();
-		columnTitles.add("OrderID");
-		columnTitles.add("ProductID");
-		columnTitles.add("LocationID");
+		columnTitlesOrder=new ArrayList<String>();
+		columnTitlesOrder.add("OrderID");
+		columnTitlesOrder.add("ProductID");
+		columnTitlesOrder.add("LocationID");
 		
-		columnTitleForSorting="ProductID";
+		columnTitleForSortingOrder="ProductID";
 		
-		selectedParameters=new HashMap<String, String>();
-		selectedParameters.put("LocationID", "3");
+		selectedParametersOrder=new HashMap<String, String>();
+		selectedParametersOrder.put("LocationID", "3");
 		getOrdersFromDatabase();
 	}
 	
 	public void getProducts(){
-		selectedParameters2=new HashMap<String, String>();
-		String x=listOfOrdersToShip.get(0).get(0);
-		selectedParameters2.put("ProductID",x);
+		selectedParametersProduct=new HashMap<String, String>();
+		String x=listOfOrders.get(0).get(0);
+		selectedParametersProduct.put("ProductID",x);
 		
-		columnTitles2=new ArrayList<String>();
-		columnTitles2.add("ProductID");
-		columnTitles2.add("ItemID");
-		columnTitles2.add("ProductName");
+		columnTitlesProduct=new ArrayList<String>();
+		columnTitlesProduct.add("ProductID");
+		columnTitlesProduct.add("ItemID");
+		columnTitlesProduct.add("ProductName");
 		
-		columnTitleForSorting2="ProductName";
+		columnTitleForSortingProduct="ProductName";
 		getProductsFromDatabase();
 	}
 	
 	public void getItems(){
-		selectedParameters3=new HashMap<String, String>();
+		selectedParametersItem=new HashMap<String, String>();
 		String x=listOfProducts.get(0).get(0);
-		selectedParameters3.put("ItemID",x);
+		selectedParametersItem.put("ItemID",x);
 		
-		columnTitles3=new ArrayList<String>();
-		columnTitles3.add("ItemID");
-		columnTitles3.add("ItemName");
+		columnTitlesItem=new ArrayList<String>();
+		columnTitlesItem.add("ItemID");
+		columnTitlesItem.add("ItemName");
 		
-		columnTitleForSorting3="ItemID";
+		columnTitleForSortingItem="ItemID";
 		getItemsFromDatabase();
 	}
 	
@@ -127,24 +137,24 @@ public class OrderOnQueueReportControl {
 	}
 	
 	public void getItemsFromDatabase(){
-		listOfItems=db.getTableRows("item", selectedParameters3, columnTitles3, columnTitleForSorting3);
+		listOfItems=db.getTableRows("item", selectedParametersItem, columnTitlesItem, columnTitleForSortingItem);
 	}
 	
 	public void getProductsFromDatabase(){
-		listOfProducts=db.getTableRows("product", selectedParameters2, columnTitles2, columnTitleForSorting2);
+		listOfProducts=db.getTableRows("product", selectedParametersProduct, columnTitlesProduct, columnTitleForSortingProduct);
 	}
 	
 	public void getOrdersFromDatabase(){
-		listOfOrders=db.getTableRows("ordertable", selectedParameters, columnTitles, columnTitleForSorting);
+		listOfOrders=db.getTableRows("ordertable", selectedParametersOrder, columnTitlesOrder, columnTitleForSortingOrder);
 	}
 	
 	public void getInventoryFromDatabase(){
-		inventoryList=db.getTableRows("ordertable", selectedParameters, columnTitles, columnTitleForSorting);
+		inventoryList=db.getTableRows("inventory", selectedParametersInventory, columnTitlesInventory, columnTitleForSortingInventory);
 	}
 	
-	public void updateDatabase(Shipment shipment){
+	public void updateDatabase(){
 		
-	}*/
+	}
 	
 	
 }
