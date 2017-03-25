@@ -19,15 +19,27 @@ public class OrdersOnQueue extends Report {
 	private int locationID=0;
 	private String locationType;
 //	private List<Movement> movements;
-	private Employee employee;
+	//private Employee employee;
 	
-	public OrdersOnQueue(OrdersOnQueueBuilder builder){
+	public OrdersOnQueue(OrdersOnQueueBuilder b){
 		this.reportName="Orders On Queue Report";
-		System.out.println("Orders to be processed");
+		this.orders=b.orders;
+		this.products=b.products;
+		this.items=b.items;
+		this.inventory=b.inventory;
+		this.location=b.location;
+		this.locationID=location.getLocationID();
+		this.locationType=location.getLocationType();
+		System.out.println("created");
+		//this.employee=b.employee;	
 	}
 	
 	@Override
 	public String generateReport(){
-		return "query";
+		return "";
+	}
+	
+	public void printReport(){
+		
 	}
 }

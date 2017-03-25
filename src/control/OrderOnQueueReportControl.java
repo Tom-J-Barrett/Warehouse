@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import Database.Database;
+import employee.Employee;
 import inventory.Inventory;
 import inventory.Item;
 import inventory.Order;
 import inventory.Product;
+import location.InventoryLocation;
 import location.Location;
 import report.OrdersOnQueue;
 import report.OrdersOnQueueBuilder;
@@ -54,7 +56,20 @@ public class OrderOnQueueReportControl {
 	
 	
 	OrderOnQueueReportControl(){
-		//report=new OrdersOnQueueBuilder();
+		//Employee emp=new Employee();
+		db=new Database();
+		location=new InventoryLocation(123,"3");
+		getOrders();
+		getProducts();
+		getItems();
+		
+		report=new OrdersOnQueueBuilder().
+				orders(orders).
+				products(products).
+				items(items).
+				inventory(inventory).
+				location(location).
+				build();
 	}
 	
 public void createItems(){
@@ -105,6 +120,7 @@ public void createItems(){
 		getOrdersFromDatabase();
 	}
 	
+	
 	public void getProducts(){
 		selectedParametersProduct=new HashMap<String, String>();
 		String x=listOfOrders.get(0).get(0);
@@ -148,9 +164,10 @@ public void createItems(){
 		listOfOrders=db.getTableRows("ordertable", selectedParametersOrder, columnTitlesOrder, columnTitleForSortingOrder);
 	}
 	
-	public void getInventoryFromDatabase(){
+	
+	/*public void getInventoryFromDatabase(){
 		inventoryList=db.getTableRows("inventory", selectedParametersInventory, columnTitlesInventory, columnTitleForSortingInventory);
-	}
+	}*/
 	
 	public void updateDatabase(){
 		

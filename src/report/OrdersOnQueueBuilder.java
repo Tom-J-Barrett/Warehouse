@@ -11,53 +11,54 @@ import employee.Employee;
 import report.OrdersOnQueue;
 
 public final class OrdersOnQueueBuilder {
-	private OrdersOnQueue order;
-	private List<Order> orders;
-	private List<Product> products;
-	private List<Item> items;
-	private List<Inventory> inventory;
-	private Location location;
+	public OrdersOnQueue order;
+	public List<Order> orders;
+	public List<Product> products;
+	public List<Item> items;
+	public List<Inventory> inventory;
+	public Location location;
 	//private Order order;
-	private int locationID=0;
-	private String locationType;
+	public int locationID=0;
+	public String locationType;
 //	private List<Movement> movements;
-	private Employee employee;
+	//public Employee employee;
 	
-	OrdersOnQueueBuilder(){
-		
-	}
 	
 	public OrdersOnQueueBuilder orders(List<Order> orders){
+		System.out.println("1");
 		this.orders=orders;
 		return this;
 	}
 	
 	public OrdersOnQueueBuilder products(List<Product> products){
+		System.out.println("2");
 		this.products=products;
 		return this;
 	}
 	
 	public OrdersOnQueueBuilder items(List<Item> items){
+		System.out.println("3");
 		this.items=items;
 		return this;
 	}
 	
 	public OrdersOnQueueBuilder inventory(List<Inventory> inventory){
+		System.out.println("4");
 		this.inventory=inventory;
 		return this;
 	}
 	
-	public OrdersOnQueueBuilder employee(Employee employee){
+	/*public OrdersOnQueueBuilder employee(Employee employee){
 		this.employee=employee;
 		return this;
-	}
+	}*/
 	
 	public OrdersOnQueueBuilder location(Location location){
 		this.location=location;
 		return this;
 	}
 	
-	public OrdersOnQueueBuilder locationID(){
+	/*public OrdersOnQueueBuilder locationID(){
 		locationID=location.getLocationID();
 		return this;
 	}
@@ -65,33 +66,30 @@ public final class OrdersOnQueueBuilder {
 	public OrdersOnQueueBuilder locationType(){
 		locationType=location.getLocationType();
 		return this;
-	}
+	}*/
 	
 	public OrdersOnQueue build(){
 		if(orders==null){
-			throw new IllegalStateException("No list of orders");
+			System.out.println("No list of orders");
 		}
 		if(products==null){
-			throw new IllegalStateException("No list of products");
+			System.out.println("No list of products");
 		}
 		if(items==null){
-			throw new IllegalStateException("No list of items");
+			System.out.println("No list of items");
 		}
 		if(inventory==null){
-			throw new IllegalStateException("No list of inventory");
-		}
-		if(employee==null){
-			throw new IllegalStateException("No employee");
+			System.out.println("No list of inventory");
 		}
 		if(location==null){
-			throw new IllegalStateException("No location");
+			System.out.println("No location");
 		}
-		if(locationID==0){
+		/*if(locationID==0){
 			throw new IllegalStateException("No location id");
 		}
 		if(locationType==null){
 			throw new IllegalStateException("No location type");
-		}
+		}*/
 		return new OrdersOnQueue(this);
 	}
 	
