@@ -63,6 +63,4 @@ public final class ReportBuilder<T> {
 		}
 		return new OrdersOnQueue(this);
 	}*/
-	
-	
 }

@@ -17,7 +17,7 @@ public class ReportFactory {
 			
 		}
 		else if(type=="Scrap Report"){
-			
+			report= new ScrapReport(b);
 		}
 		else{
 			System.out.println("Report doesn't exist");

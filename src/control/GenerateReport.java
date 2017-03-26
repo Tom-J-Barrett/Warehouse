@@ -14,6 +14,7 @@ public class GenerateReport {
 	private int reportID;
 	private String query;
 	private OrderOnQueueReportControl orderReport;
+	private ScrapReportControl scrapReport;
 	
 	public GenerateReport(){
 		getReportFromUser();
@@ -34,7 +35,7 @@ public class GenerateReport {
 		switch(reportID){
 			case 1:report=new EmployeeReport(); break;
 			case 2:report=new ProductReport(); break;
-			case 3:report=new ScrapReport(); break;
+			case 3:scrapReport=new ScrapReportControl(); break;
 			case 4:report=new InventoryReport(); break;
 			case 5:orderReport=new OrderOnQueueReportControl(); break;
 		}
