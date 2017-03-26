@@ -19,6 +19,9 @@ public class OrdersOnQueue extends Report {
 	private String locationType;
 //	private List<Movement> movements;
 	//private Employee employee;
+	private Product product;
+	private Item item;
+	private String reportName;
 	
 	public OrdersOnQueue(ReportBuilder b){
 		this.reportName=b.reportName;
@@ -29,7 +32,6 @@ public class OrdersOnQueue extends Report {
 		this.location=b.location;
 		this.locationID=location.getLocationID();
 		this.locationType=location.getLocationType();
-		System.out.println("created");
 		//this.employee=b.employee;	
 	}
 	
@@ -41,9 +43,13 @@ public class OrdersOnQueue extends Report {
 	public void printReport(){
 		System.out.println(reportName);
 		for(Order order: orders){
-			//for(Product product: order.getProducts()){
-			//	for(Item item: product.getItems())
-			//}
+			product=order.getProducts().get(0);
+			item=product.getItems().get(0);
+			System.out.println("Order : "+ order.getOrderID());
+			System.out.println("	Product ID: "+ product.getProductID());
+			System.out.println("	Product Name: "+ product.getProductName());
+			System.out.println("		Item ID: "+ item.getItemID());
+			System.out.println("		Item ID: "+ item.getItemName());
 		}
 	}
 }

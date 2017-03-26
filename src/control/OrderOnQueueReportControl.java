@@ -16,10 +16,11 @@ import location.Location;
 import report.OrdersOnQueue;
 import report.Report;
 import report.ReportBuilder;
+import report.ReportFactory;
 import shipment.Shipment;
 
 public class OrderOnQueueReportControl {
-	private OrdersOnQueue report;
+	private Report report;
 	private Location location;
 	private int locationID,orderID;
 	
@@ -40,11 +41,7 @@ public class OrderOnQueueReportControl {
 	private HashMap<String, String> selectedParametersItem;
 	private ArrayList<String> columnTitlesItem;
 	private String columnTitleForSortingItem;
-	
-	private HashMap<String, String> selectedParametersInventory;
-	private ArrayList<String> columnTitlesInventory;
-	private String columnTitleForSortingInventory;
-	
+
 	private List<List<String>> listOfOrders;
 	private List<List<String>> listOfProducts;
 	private List<List<String>> listOfItems;
@@ -53,22 +50,27 @@ public class OrderOnQueueReportControl {
 	private Product product;
 	private Order order;
 	private Inventory inven;
+	private ReportFactory factory;
 	
 	
 	OrderOnQueueReportControl(){
-		//Employee emp=new Employee();
+		factory=new ReportFactory();
 		db=new Database();
 		location=new InventoryLocation(123,"3");
 		getOrders();
 		getProducts();
 		getItems();
-		String name="report";
+		createItems();
+		createProduct();
+		createOrder();
+		String name="Order Report";
 		
-		report=new ReportBuilder().
+		report=new ReportBuilder(factory).
 				listOfObjects(orders).
 				reportName(name).
 				location(location).
 				build();
+		report.printReport();
 	}
 	
 public void createItems(){
@@ -89,20 +91,22 @@ public void createItems(){
 	
 	public void createOrder(){
 		orders=new ArrayList<Order>();
-		String name=listOfOrders.get(0).get(2);
-		String shipTo="";
-		int id=Integer.parseInt(listOfOrders.get(0).get(0));
-		order=new Order(products,id,shipTo);
-		orders.add(order);
+		for(int i=0; i<listOfOrders.size();i++){
+			String shipTo="";
+			int orderId=Integer.parseInt(listOfOrders.get(i).get(0));
+			System.out.println(orderId);
+			order=new Order(products,orderId,shipTo);
+			orders.add(order);
+		}
 	}
 	
-	public void createInventory(){
+	/*public void createInventory(){
 		inventory=new ArrayList<Inventory>();
 		String name=inventoryList.get(0).get(2);
 		int id=Integer.parseInt(inventoryList.get(0).get(0));
 		inven=new Inventory(item,location);
 		inventory.add(inven);
-	}
+	}*/
 	
 	public void getOrders(){
 		locationID=location.getLocationID();
@@ -167,10 +171,4 @@ public void createItems(){
 	/*public void getInventoryFromDatabase(){
 		inventoryList=db.getTableRows("inventory", selectedParametersInventory, columnTitlesInventory, columnTitleForSortingInventory);
 	}*/
-	
-	public void updateDatabase(){
-		
-	}
-	
-	
 }
