@@ -7,7 +7,6 @@ import inventory.Item;
 import inventory.Order;
 import inventory.Product;
 import location.Location;
-import report.OrdersOnQueueBuilder;
 
 public class OrdersOnQueue extends Report {
 	private List<Order> orders;
@@ -21,12 +20,12 @@ public class OrdersOnQueue extends Report {
 //	private List<Movement> movements;
 	//private Employee employee;
 	
-	public OrdersOnQueue(OrdersOnQueueBuilder b){
-		this.reportName="Orders On Queue Report";
+	public OrdersOnQueue(ReportBuilder b){
+		this.reportName=b.reportName;
 		this.orders=b.orders;
-		this.products=b.products;
+		/*this.products=b.products;
 		this.items=b.items;
-		this.inventory=b.inventory;
+		this.inventory=b.inventory;*/
 		this.location=b.location;
 		this.locationID=location.getLocationID();
 		this.locationType=location.getLocationType();
@@ -40,6 +39,11 @@ public class OrdersOnQueue extends Report {
 	}
 	
 	public void printReport(){
-		
+		System.out.println(reportName);
+		for(Order order: orders){
+			//for(Product product: order.getProducts()){
+			//	for(Item item: product.getItems())
+			//}
+		}
 	}
 }

@@ -14,8 +14,8 @@ import inventory.Product;
 import location.InventoryLocation;
 import location.Location;
 import report.OrdersOnQueue;
-import report.OrdersOnQueueBuilder;
 import report.Report;
+import report.ReportBuilder;
 import shipment.Shipment;
 
 public class OrderOnQueueReportControl {
@@ -62,12 +62,11 @@ public class OrderOnQueueReportControl {
 		getOrders();
 		getProducts();
 		getItems();
+		String name="report";
 		
-		report=new OrdersOnQueueBuilder().
-				orders(orders).
-				products(products).
-				items(items).
-				inventory(inventory).
+		report=new ReportBuilder().
+				listOfObjects(orders).
+				reportName(name).
 				location(location).
 				build();
 	}

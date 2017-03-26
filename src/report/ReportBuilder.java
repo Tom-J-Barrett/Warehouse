@@ -10,27 +10,28 @@ import movement.Movement;
 import employee.Employee;
 import report.OrdersOnQueue;
 
-public final class OrdersOnQueueBuilder {
+public final class ReportBuilder<T> {
 	public OrdersOnQueue order;
-	public List<Order> orders;
-	public List<Product> products;
-	public List<Item> items;
-	public List<Inventory> inventory;
+	public List<T> orders;
+	//public List<T> list;
+	//public List<Product> products;
+	//public List<Item> items;
+	//public List<Inventory> inventory;
 	public Location location;
 	//private Order order;
 	public int locationID=0;
 	public String locationType;
+	public String reportName;
 //	private List<Movement> movements;
 	//public Employee employee;
 	
-	
-	public OrdersOnQueueBuilder orders(List<Order> orders){
+	public ReportBuilder<T> listOfObjects(List<T> list){
 		System.out.println("1");
-		this.orders=orders;
+		this.orders=list;
 		return this;
 	}
 	
-	public OrdersOnQueueBuilder products(List<Product> products){
+	/*public OrdersOnQueueBuilder products(List<Product> products){
 		System.out.println("2");
 		this.products=products;
 		return this;
@@ -46,14 +47,19 @@ public final class OrdersOnQueueBuilder {
 		System.out.println("4");
 		this.inventory=inventory;
 		return this;
-	}
+	}*/
 	
 	/*public OrdersOnQueueBuilder employee(Employee employee){
 		this.employee=employee;
 		return this;
 	}*/
 	
-	public OrdersOnQueueBuilder location(Location location){
+	public ReportBuilder reportName(String reportName){
+		this.reportName=reportName;
+		return this;
+	}
+	
+	public ReportBuilder location(Location location){
 		this.location=location;
 		return this;
 	}
@@ -72,7 +78,7 @@ public final class OrdersOnQueueBuilder {
 		if(orders==null){
 			System.out.println("No list of orders");
 		}
-		if(products==null){
+		/*if(products==null){
 			System.out.println("No list of products");
 		}
 		if(items==null){
@@ -80,9 +86,12 @@ public final class OrdersOnQueueBuilder {
 		}
 		if(inventory==null){
 			System.out.println("No list of inventory");
-		}
+		}*/
 		if(location==null){
 			System.out.println("No location");
+		}
+		if(reportName==null){
+			System.out.println("No name");
 		}
 		/*if(locationID==0){
 			throw new IllegalStateException("No location id");

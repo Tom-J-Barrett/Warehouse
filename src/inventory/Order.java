@@ -3,10 +3,14 @@ package inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import location.InventoryLocation;
+import location.Location;
+
 public class Order{
 	private List<Product> products;
 	private int orderID;
 	private String shipTo;
+	private Location location;
 	
 	public Order(){
 		
@@ -16,6 +20,7 @@ public class Order{
 		this.products=products2;
 		this.orderID=orderID;
 		this.shipTo=shipTo;
+		location=new InventoryLocation(123,"1");
 	}
 	
 	public List<Product> getProducts(){
@@ -36,5 +41,9 @@ public class Order{
 	
 	public int getOrderID(){
 		return orderID;
+	}
+	
+	public Location getLocation(){
+		return location;
 	}
 }
