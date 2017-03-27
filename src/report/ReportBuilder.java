@@ -12,7 +12,8 @@ import report.OrdersOnQueue;
 
 public final class ReportBuilder<T> {
 	public OrdersOnQueue order;
-	public List<T> orders;
+	public List<T> list;
+	public List<T> list2;
 	public Location location;
 	public int locationID=0;
 	public String locationType;
@@ -24,7 +25,12 @@ public final class ReportBuilder<T> {
 	}
 	
 	public ReportBuilder<T> listOfObjects(List<T> list){
-		this.orders=list;
+		this.list=list;
+		return this;
+	}
+	
+	public ReportBuilder<T> listOfObjects2(List<T> list){
+		this.list2=list;
 		return this;
 	}
 
@@ -39,8 +45,8 @@ public final class ReportBuilder<T> {
 	}
 	
 	public Report build(){
-		if(orders==null){
-			System.out.println("No list of orders");
+		if(list==null){
+			System.out.println("No list");
 		}
 		if(location==null){
 			System.out.println("No location");

@@ -13,6 +13,7 @@ public class Database
     private String user = "root";
     private String password = "aicahsah";
     private String databaseTitle = "Warehouse";
+    private String orValue;
     public Database()
     {
         try
@@ -126,6 +127,45 @@ public class Database
             return new ArrayList<>();
         }
     }
+    
+    public List<List<String>> getTableRowsOr(String tableName, HashMap<String, String> selectedParameters, List<String> columnTitles,
+            String columnTitleForSorting, String or)
+	{
+		try
+		{
+			Connection connection = DriverManager.getConnection(databaseUrl, user, password);
+			Statement currentStatement = connection.createStatement();
+			StringBuilder sqlStatement = new StringBuilder("select ");
+			if(columnTitles.size() == 0){
+			sqlStatement.append("*");
+			}    
+			else
+			{
+				columnTitles.forEach(x -> sqlStatement.append(x + ", "));
+				sqlStatement.setLength(sqlStatement.length() - 2);
+			}
+			sqlStatement.append(" from " + tableName);
+			addParametersToSQLStatement(selectedParameters, sqlStatement);
+			selectedParameters.forEach((x, y) ->
+            {
+               orValue=x;
+            });
+			sqlStatement.append(" or "+ orValue+ "="+or);
+			if(columnTitleForSorting.length() > 0)
+				sqlStatement.append(" order by " + columnTitleForSorting + " asc");
+			//System.out.println(sqlStatement.toString());
+			List<List<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
+			currentStatement.close();
+			connection.close();
+			System.out.println(sqlStatement.toString());
+			return retrievedRows;
+		}
+		catch(Exception error)
+		{
+			JOptionPane.showMessageDialog(null, error);
+			return new ArrayList<>();
+		}
+	}
     /*
     This method is very easy to utilise. This method is utilised to get the max value of a specified column from a specified table. It takes two parameters
     which are both required. The parameter tableName is required for the name of the desired table of the database. The parameter columnName is required for the

@@ -21,18 +21,16 @@ public class OrdersOnQueue extends Report {
 	//private Employee employee;
 	private Product product;
 	private Item item;
+	private Item item2;
 	private String reportName;
 	
 	public OrdersOnQueue(ReportBuilder b){
 		this.reportName=b.reportName;
-		this.orders=b.orders;
-		/*this.products=b.products;
-		this.items=b.items;
-		this.inventory=b.inventory;*/
+		this.orders=b.list;
+		this.inventory=b.list2;
 		this.location=b.location;
 		this.locationID=location.getLocationID();
 		this.locationType=location.getLocationType();
-		//this.employee=b.employee;	
 	}
 	
 	@Override
@@ -45,11 +43,14 @@ public class OrdersOnQueue extends Report {
 		for(Order order: orders){
 			product=order.getProducts().get(0);
 			item=product.getItems().get(0);
+			item2=product.getItems().get(1);
 			System.out.println("Order : "+ order.getOrderID());
 			System.out.println("	Product ID: "+ product.getProductID());
 			System.out.println("	Product Name: "+ product.getProductName());
 			System.out.println("		Item ID: "+ item.getItemID());
 			System.out.println("		Item ID: "+ item.getItemName());
+			System.out.println("		Item ID: "+ item2.getItemID());
+			System.out.println("		Item ID: "+ item2.getItemName());
 		}
 	}
 }

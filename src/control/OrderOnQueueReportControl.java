@@ -41,12 +41,17 @@ public class OrderOnQueueReportControl {
 	private HashMap<String, String> selectedParametersItem;
 	private ArrayList<String> columnTitlesItem;
 	private String columnTitleForSortingItem;
+	
+	private HashMap<String, String> selectedParametersInventory;
+	private ArrayList<String> columnTitlesInventory;
+	private String columnTitleForSortingInventory;
 
 	private List<List<String>> listOfOrders;
 	private List<List<String>> listOfProducts;
 	private List<List<String>> listOfItems;
 	private List<List<String>> inventoryList;
 	private Item item;
+	private Item item2;
 	private Product product;
 	private Order order;
 	private Inventory inven;
@@ -67,6 +72,7 @@ public class OrderOnQueueReportControl {
 		
 		report=new ReportBuilder(factory).
 				listOfObjects(orders).
+				listOfObjects2(inventory).
 				reportName(name).
 				location(location).
 				build();
@@ -77,8 +83,12 @@ public void createItems(){
 		items=new ArrayList<Item>();
 		int id=Integer.parseInt(listOfItems.get(0).get(0));
 		String name=listOfItems.get(0).get(1);
+		int id2=Integer.parseInt(listOfItems.get(1).get(0));
+		String name2=listOfItems.get(1).get(1);
 		item=new Item(name,id);
+		item2=new Item(name2,id2);
 		items.add(item);
+		items.add(item2);
 	}
 	
 	public void createProduct(){
@@ -100,13 +110,13 @@ public void createItems(){
 		}
 	}
 	
-	/*public void createInventory(){
+	public void createInventory(){
 		inventory=new ArrayList<Inventory>();
 		String name=inventoryList.get(0).get(2);
 		int id=Integer.parseInt(inventoryList.get(0).get(0));
 		inven=new Inventory(item,location);
 		inventory.add(inven);
-	}*/
+	}
 	
 	public void getOrders(){
 		locationID=location.getLocationID();
@@ -133,6 +143,8 @@ public void createItems(){
 		columnTitlesProduct.add("ProductID");
 		columnTitlesProduct.add("ItemID");
 		columnTitlesProduct.add("ProductName");
+		columnTitlesProduct.add("Item2ID");
+		
 		
 		columnTitleForSortingProduct="ProductName";
 		getProductsFromDatabase();
@@ -140,7 +152,7 @@ public void createItems(){
 	
 	public void getItems(){
 		selectedParametersItem=new HashMap<String, String>();
-		String x=listOfProducts.get(0).get(0);
+		String x=listOfProducts.get(0).get(1);
 		selectedParametersItem.put("ItemID",x);
 		
 		columnTitlesItem=new ArrayList<String>();
@@ -149,6 +161,7 @@ public void createItems(){
 		
 		columnTitleForSortingItem="ItemID";
 		getItemsFromDatabase();
+		
 	}
 	
 	public void getInventory(){
@@ -156,7 +169,7 @@ public void createItems(){
 	}
 	
 	public void getItemsFromDatabase(){
-		listOfItems=db.getTableRows("item", selectedParametersItem, columnTitlesItem, columnTitleForSortingItem);
+		listOfItems=db.getTableRowsOr("item", selectedParametersItem, columnTitlesItem, columnTitleForSortingItem, listOfProducts.get(0).get(3));
 	}
 	
 	public void getProductsFromDatabase(){
@@ -168,7 +181,7 @@ public void createItems(){
 	}
 	
 	
-	/*public void getInventoryFromDatabase(){
+	public void getInventoryFromDatabase(){
 		inventoryList=db.getTableRows("inventory", selectedParametersInventory, columnTitlesInventory, columnTitleForSortingInventory);
-	}*/
+	}
 }
