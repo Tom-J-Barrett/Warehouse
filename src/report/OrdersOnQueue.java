@@ -51,6 +51,25 @@ public class OrdersOnQueue extends Report {
 			System.out.println("		Item ID: "+ item.getItemName());
 			System.out.println("		Item ID: "+ item2.getItemID());
 			System.out.println("		Item ID: "+ item2.getItemName());
+			boolean itemC=false;
+			boolean item2C=false;
+			for(Inventory inven: inventory){
+				if((inven.getItem().getItemID()==item.getItemID())){
+					itemC=true;
+					System.out.println("Collect " +item.getItemName() + " from Location " + inven.getLocation().getLocationID());
+				}
+				else if((inven.getItem().getItemID()==item2.getItemID())){
+					item2C=true;
+					System.out.println("Collect " +item2.getItemName() + " from Location " + inven.getLocation().getLocationID());
+				}
+			}
+			if(itemC=false){
+				System.out.println("We are our of stock of item "+ item.getItemName());
+			}
+			else if(item2C=false){
+				System.out.println("We are our of stock of item "+ item2.getItemName());
+			}
 		}
 	}
+	
 }

@@ -38,16 +38,16 @@ public class Ship {
 	private List<List<String>> listOfOrdersToShip;
 	private List<List<String>> listOfProducts;
 	private List<List<String>> listOfItems;
-	
+	private int index;
 	private List<String> shipvalues;
 	
 	public Ship(Database db){
 		this.db=db;
 		location=new ShipLocation();
 		getOrders();
+		displayOrders();
 		getProducts();
 		getItems();
-		displayOrders();
 		createItems();
 		createProduct();
 		createOrder();
@@ -55,11 +55,13 @@ public class Ship {
 	}
 	
 	public void shipOrder(){
+		System.out.println("ship order");
 		shipment=new Shipment(location,orderToShip,orderToShip.getShipTo());
 		updateDatabase(shipment);
 	}
 	
 	public void createItems(){
+		System.out.println("create items");
 		items=new ArrayList<Item>();
 		int id=Integer.parseInt(listOfItems.get(0).get(0));
 		String name=listOfItems.get(0).get(1);
@@ -68,6 +70,7 @@ public class Ship {
 	}
 	
 	public void createProduct(){
+		System.out.println("create product");
 		products=new ArrayList<Product>();
 		String name=listOfProducts.get(0).get(2);
 		int id=Integer.parseInt(listOfProducts.get(0).get(0));
@@ -76,8 +79,9 @@ public class Ship {
 	}
 	
 	public void createOrder(){
+		System.out.println("create order");
 		//List<Product> products2, int orderID, String shipTo
-		int id=Integer.parseInt(listOfOrdersToShip.get(0).get(0));
+		int id=Integer.parseInt(listOfOrdersToShip.get(index).get(0));
 		String shipTo="Address";
 		orderToShip=new Order(products,id,shipTo);
 	}
@@ -109,8 +113,15 @@ public class Ship {
 	}
 	
 	public void getProducts(){
+		index=0;
+		for(int i=0;i<listOfOrdersToShip.size();i++){
+			if(Integer.parseInt(listOfOrdersToShip.get(i).get(0))==orderID){
+				index=i;
+			}
+		}
+		
 		selectedParameters2=new HashMap<String, String>();
-		String x=listOfOrdersToShip.get(0).get(0);
+		String x=listOfOrdersToShip.get(index).get(1);
 		selectedParameters2.put("ProductID",x);
 		
 		columnTitles2=new ArrayList<String>();
@@ -123,6 +134,7 @@ public class Ship {
 	}
 	
 	public void getItems(){
+		System.out.println("get items");
 		selectedParameters3=new HashMap<String, String>();
 		String x=listOfProducts.get(0).get(0);
 		selectedParameters3.put("ItemID",x);
@@ -148,8 +160,10 @@ public class Ship {
 	}
 	
 	public void updateDatabase(Shipment shipment){
+		System.out.println("update");
 		shipvalues=new ArrayList<String>();
-		shipvalues.add("1");
+		int maximumValueOfColumn = db.getMaxValueOfColumn("shipment", "ShipmentID");
+		shipvalues.add(Integer.toString(maximumValueOfColumn+1));
 		shipvalues.add("1");
 		shipvalues.add(Integer.toString(shipment.getOrderID()));
 		db.insertTableRow("shipment", shipvalues);
