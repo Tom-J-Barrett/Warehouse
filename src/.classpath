@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/Flamingo/trunk/www/webstart/flamingo.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/substance-master/substance-master/lib/trident.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

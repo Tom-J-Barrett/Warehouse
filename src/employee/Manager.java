@@ -7,7 +7,10 @@ import java.util.List;
 
 public class Manager extends Employee
 {
-    private String role;
+    public Manager(String username, String password, String firstname, String surname)
+    {
+    	super(username, password, firstname, surname, "manager");
+    }
     public Manager()
     {
 
@@ -22,8 +25,6 @@ public class Manager extends Employee
         menuItems.put(5, new ArrayList<>(Arrays.asList("5. View Replenishment", "View Replenishment Menu Item Selected")));
         menuItems.put(6, new ArrayList<>(Arrays.asList("6. Approve Out Of QI Ops", "Approve Out Of QI Ops Menu Item Selected")));
         menuItems.put(7, new ArrayList<>(Arrays.asList("7. Report", "Report Menu Item Selected")));
-        menuItems.put(8, new ArrayList<>(Arrays.asList("8. LogOut", "Log Out Menu Item Selected")));
-        menuItems.put(9, new ArrayList<>(Arrays.asList("9. Exit", "Exit Menu Item Selected")));
         return menuItems;
     }
 }
