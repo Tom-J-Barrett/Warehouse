@@ -37,4 +37,9 @@ public class Order{
 	public int getOrderID(){
 		return orderID;
 	}
+	
+	@Override
+	public String toString() {
+		return "Product [items=" + items + ", productName=" + productName + ", productID=" + productID + "]";
+	}
 }
