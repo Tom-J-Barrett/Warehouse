@@ -1,93 +1,95 @@
 package control;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
+import Database.Database;
 import inventory.Item;
 import inventory.Product;
 
+/*WORKING BUT STILL A PROBLEM WITH DUPLICATE IN DATABASE*/
 
 public class AddNewProduct {
 	private Product product;
+	private Item item;
+	private Database db;
+	
+	private String ProductName;
+	private int ProductID;
+	
 	private List<Item> items;
-	private ArrayList<Item> productItems;
-	private Item item1;
-	private Item item2;
-	private Item item3;
-	private String productName;
-	private int productID, itemID;
 
+	private List<List<String>> listOfItems;
+	private HashMap<String, String> selectedParametersItems;
+	private List<String> columnTitlesItems;
+	private String columnTitleForSortingItems;
 
-	public AddNewProduct(){
-		items=new ArrayList<Item>();
-		productItems=new ArrayList<Item>();
-		getInfoFromDatabase();
-		getID();
-		getName();
-		displayItems();
+	private List<String> insertData;
+	
+	public AddNewProduct(Database db){
+		this.db=db;
+		getItems();
+		setID();
+		setName();
+		setItems();
 		addProduct();
 	}
-
+	
 	public void addProduct(){
-		product=new Product(productItems, productName, productID);
+		product=new Product(items, ProductName, ProductID);
 		updateDatabase(product);
 	}
-
-
-	public void createItemList(){
-		item1=new Item("item1",1);
-		item2=new Item("item2",2);
-		item3=new Item("item3",3);
-		items.add(item1);
-		items.add(item2);
-		items.add(item3);
+	
+	public void setID(){
+		Scanner in=new Scanner(System.in);
+		System.out.println("Please select an ID :");
+		ProductID = in.nextInt();	
 	}
-
-	public void getName(){
-
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Please enter name of new product: ");
-		productName = sc.nextLine();
-		
+	
+	public void setName(){
+		Scanner in=new Scanner(System.in);
+		System.out.println("Please select the name of the new product :");
+		ProductName= in.nextLine();		
 	}
-
-	public void displayItems(){
-
+	
+	public void setItems(){
+		items=new ArrayList<Item>();
 		System.out.println("Items : ");
-
-		for (Item item : items) {
-			System.out.println(item.getItemID());
+		System.out.println(listOfItems);
+		Scanner in=new Scanner(System.in);
+		for(int i=1; i<=2; i++){
+			System.out.println("Please select item n°"+i+" :");
+			int id=in.nextInt();
+			String name=listOfItems.get(id-1).get(1);
+			item=new Item(name,id);
+			items.add(item);
 		}
 
-		for(int i=1; i<=2; i++ ) {	
-			Scanner sc=new Scanner(System.in);
-			System.out.println("Please select itemID "+i+" : ");
-			itemID=Integer.parseInt(sc.nextLine());
-		//	sc.close();
-			for (Item item : items) {
-				if (itemID == item.getItemID()){
-					productItems.add(item);
-				}
-			}
-		}
 	}
-
-	public void getID(){
-
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Choose a ID");
-		productID = sc.nextInt();		
-	//	sc.close();
-		//to change for auto incrementation from db
+		
+	public void getItems(){
+		selectedParametersItems=new HashMap<String, String>();
+	//	selectedParametersItems.put("1","1");
+		
+		columnTitlesItems=new ArrayList<String>();
+		columnTitlesItems.add("ItemID");
+		columnTitlesItems.add("ItemName");
+		
+		columnTitleForSortingItems="ItemID";
+		getItemsFromDatabase();
 	}
-
-	public void getInfoFromDatabase(){
-		createItemList();
+	
+	public void getItemsFromDatabase(){
+		listOfItems=db.getTableRows("item", selectedParametersItems, columnTitlesItems, columnTitleForSortingItems);
 	}
-
+	
 	public void updateDatabase(Product product){
-
-		System.out.println("Product added : "+ product.getProductID() +" - "+ product.getProductName()+" - "+ product.getItems());
+		insertData=new ArrayList<String>();
+		insertData.add(String.valueOf(ProductID));
+		insertData.add(ProductName);
+		insertData.add(String.valueOf(items.get(0).getItemID()));
+		insertData.add(String.valueOf(items.get(1).getItemID()));
+		db.insertTableRow("product", insertData);
+		System.out.println("Added " +product);
 	}
+	
 }

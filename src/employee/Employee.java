@@ -11,24 +11,22 @@ public class Employee
     private String password;
     private String firstname;
     private String surname;
-    private String DOB;
     private String role;
-    public Employee(String username, String password, String firstname, String surname, String DOB, String role)
+    public Employee(String username, String password, String firstname, String surname, String role)
     {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.surname = surname;
-        this.DOB = DOB;
         this.role = role;
     }
     public Employee()
     {
-
+    	;
     }
-    public String toString()
+	public String toString()
     {
-        return username + " " + password + " " + firstname + " " + surname + " " + DOB + " " + role;
+        return username + " " + password + " " + firstname + " " + surname + " " + role;
     }
     public String getUsername()
     {
@@ -62,9 +60,9 @@ public class Employee
     {
         this.surname = surname;
     }
-    public String getDOB()
+    public void setRole(String role)
     {
-        return DOB;
+    	this.role = role;
     }
     public String getRole()
     {

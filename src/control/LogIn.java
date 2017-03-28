@@ -1,23 +1,30 @@
 package control;
+import employee.*;
 
-//import com.sun.javafx.image.BytePixelSetter;
-import employee.Employee;
-import employee.Manager;
-import employee.Operator;
-import employee.WHWorker;
-
-import java.util.Scanner;
-
+import java.util.*;
+import Database.Database;
 public class LogIn
 {
-    public LogIn()
+    private Employee anEmployee;
+    private String logOnType;
+	public LogIn(String logOnType)
     {
-        attemptLogOn("");
+        this.logOnType = logOnType;
+		if(logOnType == "cli")
+        	attemptLogOn("");
     }
+	public List<String> getUserDetails()
+	{
+		return new ArrayList<String>(Arrays.asList(anEmployee.getFirstname(), anEmployee.getSurname(), anEmployee.getUsername(), anEmployee.getPassword()));
+	}
+	public Employee getEmployee()
+	{
+		return anEmployee;
+	}
     public void attemptLogOn(String errorMessage)
     {
         if(errorMessage.length() == 0)
-            System.out.println("Please enter your username and password");
+            System.out.println("Please enter your valid username and password");
         else
             System.out.println(errorMessage);
         System.out.println("Your Username Goes Here");
@@ -25,18 +32,13 @@ public class LogIn
         String username = aScanner.nextLine();
         System.out.println("Your Password Goes Here");
         String password = aScanner.nextLine();
-        aScanner.close();
         if(username.length() > 2 && password.length() > 2)
         {
-            System.out.println("You have been logged in successfully as " + username);
-            if(username.startsWith("o") || username.startsWith("O"))
-                createMenuForOperator(username, password);
-            else if(username.startsWith("w") || username.startsWith("W"))
-                createMenuForWarehouseWorker(username, password);
-            else if(username.startsWith("m") || username.startsWith("M"))
-                createMenuForManager(username, password);
+            String logOnMessage = processLogOn(username, password);
+            if(logOnMessage.length() > 0)
+            	attemptLogOn(logOnMessage);
             else
-                attemptLogOn("The username " + username + " should begin with a letter representing the type of the user");
+            	createMenuForEmployee();
         }
         else
         {
@@ -46,16 +48,65 @@ public class LogIn
                 attemptLogOn("The password " + password + " you entered is invalid as it has less than 2 characters");
         }
     }
-    private void createMenuForOperator(String username, String password)
+    public String processLogOn(String username, String password)
     {
-        System.out.println("You have been logged in as an operator");
-        Operator anOperator = new Operator();
+    	String errorMessage = "";
+    	Database database = new Database();
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("username", username);
+        ArrayList<ArrayList<String>> selectedEmployeeDetails =  database.getTableRows("employee", parameters, new ArrayList<String>(), "");
+        if(selectedEmployeeDetails.size() > 0)
+        {
+            ArrayList<String> currentEmployeeDetails = selectedEmployeeDetails.get(0);
+            if(currentEmployeeDetails.get(2).equals(password))
+            {
+            	if(currentEmployeeDetails.get(5).equals("operator"))
+            		anEmployee = new Operator(currentEmployeeDetails.get(3), currentEmployeeDetails.get(4), currentEmployeeDetails.get(1),
+            								  currentEmployeeDetails.get(2));
+            	else if(currentEmployeeDetails.get(5).equals("manager"))
+            		anEmployee = new Manager(currentEmployeeDetails.get(3), currentEmployeeDetails.get(4), currentEmployeeDetails.get(1), 
+            				                 currentEmployeeDetails.get(2));
+            	else if(currentEmployeeDetails.get(5).equals("warehouseworker"))
+            		anEmployee = new WHWorker(currentEmployeeDetails.get(3), currentEmployeeDetails.get(4), currentEmployeeDetails.get(1),
+            				                  currentEmployeeDetails.get(2));
+            }
+            else
+            	errorMessage = "The password " + password + " is not a valid password for " + username;
+        }
+        else
+            errorMessage = "The username " + username + " is not a valid username";
+        return errorMessage;
+    }
+    private void createMenuForEmployee()
+    {
+    	anEmployee.menu().values().forEach(x -> System.out.println(x.get(0)));
+    	System.out.println(anEmployee.menu().size() + 1 + ": Log Out");
+    	System.out.println(anEmployee.menu().size() + 2 + ": Exit");
+    	Scanner aScanner = new Scanner(System.in);
+    	int selectedMenuOption = aScanner.nextInt();
+    	if(selectedMenuOption >= 1 && selectedMenuOption <= anEmployee.menu().values().size())
+    	{
+    		System.out.println(anEmployee.menu().get(selectedMenuOption).get(1));
+    		createMenuForEmployee();
+    	}
+    	else if(selectedMenuOption == anEmployee.menu().values().size() + 1)
+    		new LogOut();
+    	else if(selectedMenuOption == anEmployee.menu().values().size() + 2)
+    		System.exit(0);
+    	else
+    	{
+    		System.out.println("Invalid Menu Entry Selected. Please try again.");
+    		createMenuForEmployee();
+    	}
+    }
+    /*private void createMenuForOperator(String username, String password)
+    {
+    	Operator anOperator = new Operator();
         anOperator.setUsername(username);
         anOperator.setPassword(password);
         anOperator.menu().values().forEach(x -> System.out.println(x.get(0)));
-        Scanner aScanner = new Scanner(System.in);
-        int selectedMenuOption = aScanner.nextInt();
-        aScanner.close();
+    	Scanner aScanner = new Scanner(System.in);
+    	int selectedMenuOption = aScanner.nextInt();
         if(selectedMenuOption >= 1 && selectedMenuOption <= 3)
         {
             System.out.println(anOperator.menu().get(selectedMenuOption).get(1));
@@ -73,14 +124,12 @@ public class LogIn
     }
     private void createMenuForWarehouseWorker(String username, String password)
     {
-        System.out.println("You have been logged in as a warehouse worker");
         WHWorker aWarehouseWorker = new WHWorker();
         aWarehouseWorker.setUsername(username);
         aWarehouseWorker.setPassword(password);
         aWarehouseWorker.menu().values().forEach(x -> System.out.println(x.get(0)));
         Scanner aScanner = new Scanner(System.in);
         int selectedMenuOption = aScanner.nextInt();
-        aScanner.close();
         if(selectedMenuOption >= 1 && selectedMenuOption <= 6)
         {
             System.out.println(aWarehouseWorker.menu().get(selectedMenuOption).get(1));
@@ -98,14 +147,12 @@ public class LogIn
     }
     private void createMenuForManager(String username, String password)
     {
-        System.out.println("You have been logged in as a manager");
         Manager aManager = new Manager();
         aManager.setUsername(username);
         aManager.setPassword(password);
         aManager.menu().values().forEach(x -> System.out.println(x.get(0)));
         Scanner aScanner = new Scanner(System.in);
         int selectedMenuOption = aScanner.nextInt();
-        aScanner.close();
         if(selectedMenuOption >= 1 && selectedMenuOption <= 7)
         {
             System.out.println(aManager.menu().get(selectedMenuOption).get(1));
@@ -120,5 +167,5 @@ public class LogIn
             System.out.println("Invalid Menu Entry Selected. Please try again.");
             createMenuForManager(username, password);
         }
-    }
+    }*/
 }

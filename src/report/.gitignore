@@ -4,3 +4,9 @@
 /ScrapReport.class
 /ProductReport.class
 /InventoryReport.class
+/OrdersToBeMade.class
+/OrdersOnQueue.class
+/OrdersOnQueueBuilder.class
+/ReportBuilder.class
+/ReportFactory.class
+/ScrapReportControl.class

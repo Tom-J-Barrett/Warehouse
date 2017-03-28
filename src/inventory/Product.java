@@ -11,7 +11,7 @@ public class Product{
 		
 	}
 	
-	public Product(ArrayList<Item> items, String productName, int productID){
+	public Product(List<Item> items, String productName, int productID){
 		this.items=items;
 		this.productName=productName;
 		this.productID=productID;
@@ -35,5 +35,10 @@ public class Product{
 	
 	public int getProductID(){
 		return productID;
+	}
+	
+	@Override
+	public String toString() {
+		return "Product [items=" + items + ", productName=" + productName + ", productID=" + productID + "]";
 	}
 }

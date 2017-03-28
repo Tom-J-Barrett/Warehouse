@@ -1,10 +1,12 @@
 package employee;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class WHWorker extends Employee
 {
-    private String role;
+    public WHWorker(String username, String password, String firstname, String surname)
+    {
+    	super(username, password, firstname, surname, "warehouseworker");
+    }
     public WHWorker()
     {
 
@@ -18,8 +20,6 @@ public class WHWorker extends Employee
         menuItems.put(4, new ArrayList<>(Arrays.asList("4. Move Out Of QI", "Move Out Of QI Menu Item Selected")));
         menuItems.put(5, new ArrayList<>(Arrays.asList("5. View Inventory To Be Moved To Operator", "View Inventory To Be Moved To Operator Menu Item Selected")));
         menuItems.put(6, new ArrayList<>(Arrays.asList("6. Ship Out Links To Other System", "Ship Out Links To Other System Menu Item Selected")));
-        menuItems.put(7, new ArrayList<>(Arrays.asList("7. LogOut", "LogOut Menu Item Selected")));
-        menuItems.put(8, new ArrayList<>(Arrays.asList("8. Exit", "Exit Menu Item Selected")));
         return menuItems;
     }
 }
