@@ -43,7 +43,13 @@ public class Order{
 		return orderID;
 	}
 	
+
 	public Location getLocation(){
 		return location;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [products=" + products + ", orderID=" + orderID + ", shipTo=" + shipTo + "]";
 	}
 }

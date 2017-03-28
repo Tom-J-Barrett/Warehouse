@@ -17,7 +17,7 @@ public class LogOut
         Scanner in = new Scanner(System.in);
         int selectedMenuItem = in.nextInt();
         if(selectedMenuItem == 1)
-            new LogIn();
+            new LogIn("cli");
         else if(selectedMenuItem == 2)
             System.exit(0);
         else
