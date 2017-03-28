@@ -33,9 +33,9 @@ public class IntelligentWarehouse {
 			case 1:GenerateReport report=new GenerateReport();break;
 			case 2:Ship ship=new Ship(db);break;
 			case 3:LogIn login= new LogIn("cli");break;
-			case 4:AddNewProduct product=new AddNewProduct();break;
+			case 4:AddNewProduct product=new AddNewProduct(db);break;
 			case 5:ReceiveInventory recInv=new ReceiveInventory(db);break;
-			case 6:Scrap scrap=new Scrap();break;
+			case 6:Scrap scrap=new Scrap(db);break;
 			case 7:run=false;break;
 			}
 			

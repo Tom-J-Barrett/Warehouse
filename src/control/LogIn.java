@@ -54,10 +54,10 @@ public class LogIn
     	Database database = new Database();
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("username", username);
-        ArrayList<ArrayList<String>> selectedEmployeeDetails =  database.getTableRows("employee", parameters, new ArrayList<String>(), "");
+        List<List<String>> selectedEmployeeDetails =  database.getTableRows("employee", parameters, new ArrayList<String>(), "");
         if(selectedEmployeeDetails.size() > 0)
         {
-            ArrayList<String> currentEmployeeDetails = selectedEmployeeDetails.get(0);
+            List<String> currentEmployeeDetails = selectedEmployeeDetails.get(0);
             if(currentEmployeeDetails.get(2).equals(password))
             {
             	if(currentEmployeeDetails.get(5).equals("operator"))
