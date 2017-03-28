@@ -13,6 +13,7 @@ public class Database
     private String user = "root";
     private String password = "aicahsah";
     private String databaseTitle = "Warehouse";
+    private String orValue;
     public Database()
     {
         try
@@ -43,8 +44,8 @@ public class Database
     "drivers.lastname"));
     ArrayList<ArrayList<String>> retrievedTableRows = aDatabase.getJoinedTableRows(tableTitles, joinConditions, selectedValues, desiredColumns, "");
     */
-    public ArrayList<ArrayList<String>> getJoinedTableRows(ArrayList<String> tableTitles, ArrayList<String> joinConditions,
-                                                           HashMap<String, String> selectedParameters, ArrayList<String> columnTitles, String columnTitleForSorting)
+    public List<List<String>> getJoinedTableRows(List<String> tableTitles, List<String> joinConditions,
+                                                           HashMap<String, String> selectedParameters, List<String> columnTitles, String columnTitleForSorting)
     {
         try
         {
@@ -68,7 +69,7 @@ public class Database
             addParametersToSQLStatement(selectedParameters, sqlStatement);
             if(columnTitleForSorting.length() > 0)
                 sqlStatement.append(" order by " + columnTitleForSorting + " asc");
-            ArrayList<ArrayList<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
+            List<List<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
             currentStatement.close();
             connection.close();
             return retrievedRows;
@@ -94,7 +95,7 @@ public class Database
     ArrayList<String> desiredColumns = new ArrayList<>(Arrays.asList("drivers.firstname", "drivers.lastname"));
     ArrayList<ArrayList<String>> retrievedTableRows = aDatabase.getTableRows("drivers", selectedValues, desiredColumns, "");
     */
-    public ArrayList<ArrayList<String>> getTableRows(String tableName, HashMap<String, String> selectedParameters, ArrayList<String> columnTitles,
+    public List<List<String>> getTableRows(String tableName, HashMap<String, String> selectedParameters, List<String> columnTitles,
                                                      String columnTitleForSorting)
     {
         try
@@ -114,8 +115,8 @@ public class Database
             addParametersToSQLStatement(selectedParameters, sqlStatement);
             if(columnTitleForSorting.length() > 0)
                 sqlStatement.append(" order by " + columnTitleForSorting + " asc");
-            System.out.println(sqlStatement.toString());
-            ArrayList<ArrayList<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
+            //System.out.println(sqlStatement.toString());
+           List<List<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
             currentStatement.close();
             connection.close();
             return retrievedRows;
@@ -126,6 +127,45 @@ public class Database
             return new ArrayList<>();
         }
     }
+    
+    public List<List<String>> getTableRowsOr(String tableName, HashMap<String, String> selectedParameters, List<String> columnTitles,
+            String columnTitleForSorting, String or)
+	{
+		try
+		{
+			Connection connection = DriverManager.getConnection(databaseUrl, user, password);
+			Statement currentStatement = connection.createStatement();
+			StringBuilder sqlStatement = new StringBuilder("select ");
+			if(columnTitles.size() == 0){
+			sqlStatement.append("*");
+			}    
+			else
+			{
+				columnTitles.forEach(x -> sqlStatement.append(x + ", "));
+				sqlStatement.setLength(sqlStatement.length() - 2);
+			}
+			sqlStatement.append(" from " + tableName);
+			addParametersToSQLStatement(selectedParameters, sqlStatement);
+			selectedParameters.forEach((x, y) ->
+            {
+               orValue=x;
+            });
+			sqlStatement.append(" or "+ orValue+ "="+or);
+			if(columnTitleForSorting.length() > 0)
+				sqlStatement.append(" order by " + columnTitleForSorting + " asc");
+			//System.out.println(sqlStatement.toString());
+			List<List<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
+			currentStatement.close();
+			connection.close();
+			System.out.println(sqlStatement.toString());
+			return retrievedRows;
+		}
+		catch(Exception error)
+		{
+			JOptionPane.showMessageDialog(null, error);
+			return new ArrayList<>();
+		}
+	}
     /*
     This method is very easy to utilise. This method is utilised to get the max value of a specified column from a specified table. It takes two parameters
     which are both required. The parameter tableName is required for the name of the desired table of the database. The parameter columnName is required for the
@@ -164,11 +204,11 @@ public class Database
     Database aDatabase = new Database();
     ArrayList<String> columnTitlesOfDriversTable = aDatabase.getColumnTitles("drivers");
     */
-    public ArrayList<String> getColumnTitles(String tableName)
+    public List<String> getColumnTitles(String tableName)
     {
         try
         {
-            ArrayList<String> columnTitles = new ArrayList<>();
+            List<String> columnTitles = new ArrayList<>();
             Connection connection = DriverManager.getConnection(databaseUrl, user, password);
             Statement currentStatement = connection.createStatement();
             ResultSet selectedRows = currentStatement.executeQuery("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME LIKE '" + tableName + "' AND " +
@@ -199,7 +239,7 @@ public class Database
     ArrayList<String> newRowValues = new ArrayList<>(Arrays.asList("5", "Shane", "Collins"));
     aDatabase.insertTableRow("drivers", newRowValues);
     */
-    public void insertTableRow(String tableName, ArrayList<String> tableRowValues)
+    public void insertTableRow(String tableName, List<String> tableRowValues)
     {
         try
         {
@@ -313,16 +353,16 @@ public class Database
             sqlStatement.setLength(sqlStatement.length() - 4);
         }
     }
-    private ArrayList<ArrayList<String>> retrieveResults(String sqlStatement, Statement currentStatement)
+    private List<List<String>> retrieveResults(String sqlStatement, Statement currentStatement)
     {
         try
         {
             ResultSet selectedRows = currentStatement.executeQuery(sqlStatement);
-            ArrayList<ArrayList<String>> retrievedRows = new ArrayList<>();
+            List<List<String>> retrievedRows = new ArrayList<>();
             Integer numberOfColumns = selectedRows.getMetaData().getColumnCount();
             while (selectedRows.next())
             {
-                ArrayList<String> aRetrievedRow = new ArrayList<>();
+                List<String> aRetrievedRow = new ArrayList<>();
                 for (Integer k = 1; k <= numberOfColumns; k++)
                     aRetrievedRow.add(selectedRows.getString(k));
                 retrievedRows.add(aRetrievedRow);

@@ -15,5 +15,9 @@ public class Report implements ReportInterface {
 	public String getName(){
 		return reportName;
 	}
+	
+	public void printReport(){
+		
+	}
 
 }

@@ -10,7 +10,7 @@ public class Inventory{
 		
 	}
 	
-	Inventory(Item item, Location location){
+	public Inventory(Item item, Location location){
 		this.item=item;
 		this.location=location;
 	}

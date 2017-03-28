@@ -116,9 +116,31 @@ public class Scrap {
 		String x=listOfProducts.get(0).get(0);
 		selectedParameters3.put("ItemID",x);
 		
+
+		/*for(Iterator<Order> it = orders.iterator(); it.hasNext();){
+			Order order = it.next();
+			if(orderID == order.getOrderID()){
+				scrapOrders.add(order);
+				it.remove();
+			}	
+		}
+		
+		System.out.println("Orders : ");
+
+		for (Order order : orders) {
+			System.out.println(order.getOrderID());
+		}
+		
+		System.out.println("Scraped orders : ");
+
+		for (Order order : scrapOrders) {
+			System.out.println(order.getOrderID());
+		}
+
 		columnTitles3=new ArrayList<String>();
 		columnTitles3.add("ItemID");
 		columnTitles3.add("ItemName");
+*/
 		
 		columnTitleForSorting3="ItemID";
 		getItemsFromDatabase();

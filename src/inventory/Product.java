@@ -11,7 +11,7 @@ public class Product{
 		
 	}
 	
-	public Product(ArrayList<Item> items, String productName, int productID){
+	public Product(List<Item> items, String productName, int productID){
 		this.items=items;
 		this.productName=productName;
 		this.productID=productID;
