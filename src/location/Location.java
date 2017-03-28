@@ -1,6 +1,6 @@
 package location;
 
-public class Location {
+public abstract class Location {
 	private int locationID;
 	private String locationType;
 	

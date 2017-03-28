@@ -9,6 +9,7 @@ import inventory.Item;
 import inventory.Order;
 import inventory.Product;
 import location.Location;
+import location.LocationFactory;
 import location.ShipLocation;
 import shipment.Shipment;
 
@@ -43,7 +44,7 @@ public class Ship {
 	
 	public Ship(Database db){
 		this.db=db;
-		location=new ShipLocation();
+		location=LocationFactory.getLocation(4,"Ship Location");
 		getOrders();
 		displayOrders();
 		getProducts();
