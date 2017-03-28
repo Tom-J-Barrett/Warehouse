@@ -1,11 +1,10 @@
 package location;
 
-public class Location {
+public abstract class Location {
 	private int locationID;
 	private String locationType;
 	
 	public Location(){
-		System.out.println("Location");
 	}
 	
 	public int getLocationID(){
