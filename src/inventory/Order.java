@@ -40,6 +40,6 @@ public class Order{
 	
 	@Override
 	public String toString() {
-		return "Product [items=" + items + ", productName=" + productName + ", productID=" + productID + "]";
+		return "Order [products=" + products + ", orderID=" + orderID + ", shipTo=" + shipTo + "]";
 	}
 }
