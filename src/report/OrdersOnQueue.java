@@ -8,7 +8,8 @@ import inventory.Order;
 import inventory.Product;
 import location.Location;
 
-public class OrdersOnQueue extends Report {
+public class OrdersOnQueue implements Report{
+
 	private List<Order> orders;
 	private List<Product> products;
 	private List<Item> items;

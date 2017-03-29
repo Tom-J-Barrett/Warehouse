@@ -1,6 +1,7 @@
 package report;
 
-public class ProductReport extends Report {
+public class ProductReport implements Report{
+	private String reportName;
 
 	public ProductReport(){
 		this.reportName="Product Report";

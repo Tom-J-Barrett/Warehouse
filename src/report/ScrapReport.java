@@ -2,9 +2,9 @@ package report;
 
 import java.util.List;
 
-public class ScrapReport extends Report{
-	private List<List<String>> scrap;
+public class ScrapReport implements Report{
 	private String reportName;
+	private List<List<String>> scrap;
 	
 	public ScrapReport(ReportBuilder b){
 		this.reportName=b.reportName;
