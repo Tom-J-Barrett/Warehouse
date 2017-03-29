@@ -10,6 +10,7 @@ public class Shipment implements Shipable {
 	private Approval approval;
 	private Order order;
 	private String shipTo;
+	private boolean isShipable;
 	
 	Shipment(){
 		
@@ -24,7 +25,7 @@ public class Shipment implements Shipable {
 
 	@Override
 	public boolean isShipable() {
-		return true;
+		return isShipable;
 	}
 
 	public Location getLocation() {

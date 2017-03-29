@@ -48,9 +48,6 @@ public final class ReportBuilder<T> {
 		if(list==null){
 			System.out.println("No list");
 		}
-		if(location==null){
-			System.out.println("No location");
-		}
 		if(reportName==null){
 			System.out.println("No name");
 		}

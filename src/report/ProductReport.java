@@ -1,14 +1,17 @@
 package report;
 
-public class ProductReport extends Report {
+public class ProductReport implements Report{
+	private String reportName;
 
-	public ProductReport(){
-		this.reportName="Product Report";
-		System.out.println("Product Information");
+	public ProductReport(ReportBuilder b){
+		this.reportName=b.reportName;
 	}
 	
-	@Override
-	public String generateReport(){
-		return "query";
+	public ProductReport(){
+
+	}
+	
+	public void printReport(){
+		System.out.println(reportName);
 	}
 }

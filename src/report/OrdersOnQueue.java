@@ -8,7 +8,8 @@ import inventory.Order;
 import inventory.Product;
 import location.Location;
 
-public class OrdersOnQueue extends Report {
+public class OrdersOnQueue implements Report{
+
 	private List<Order> orders;
 	private List<Product> products;
 	private List<Item> items;
@@ -31,11 +32,6 @@ public class OrdersOnQueue extends Report {
 		this.location=b.location;
 		this.locationID=location.getLocationID();
 		this.locationType=location.getLocationType();
-	}
-	
-	@Override
-	public String generateReport(){
-		return "";
 	}
 	
 	public void printReport(){

@@ -1,13 +1,20 @@
 package report;
 
-public class ScrapReport extends Report{
+import java.util.List;
 
+public class ScrapReport implements Report{
+	private String reportName;
+	private List<List<String>> scrap;
+	
 	public ScrapReport(ReportBuilder b){
-		System.out.println("Scrap Information");
+		this.reportName=b.reportName;
+		this.scrap=b.list;
 	}
 	
-	@Override
-	public String generateReport(){
-		return "query";
+	public void printReport(){
+		System.out.println(reportName);
+		for(int i=0;i<scrap.size();i++){
+			System.out.println("Order ID: "+scrap.get(i).get(1)+"	" +scrap.get(i).get(2));
+		}
 	}
 }
