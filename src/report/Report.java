@@ -7,11 +7,6 @@ public class Report implements ReportInterface {
 		
 	}
 	
-	@Override
-	public String generateReport(){
-		return reportName;
-	}
-	
 	public String getName(){
 		return reportName;
 	}

@@ -18,26 +18,22 @@ public class GenerateReport {
 	
 	public GenerateReport(){
 		getReportFromUser();
-		//runReport();
-		
 	}
 	
 	public void getReportFromUser(){
 		Scanner in=new Scanner(System.in);
 		System.out.println("What report would you like to run?: ");
-		System.out.println("1.Employee Report");
-		System.out.println("2.Product Report");
-		System.out.println("3.Scrap Report");
-		System.out.println("4.Inventory Report");
-		System.out.println("5.Orders to be processed Report");
+		System.out.println("1.Product Report");
+		System.out.println("2.Scrap Report");
+		System.out.println("3.Inventory Report");
+		System.out.println("4.Orders to be processed Report");
 		reportID=Integer.parseInt(in.nextLine());
 		
 		switch(reportID){
-			case 1:report=new EmployeeReport(); break;
-			case 2:report=new ProductReport(); break;
-			case 3:scrapReport=new ScrapReportControl(); break;
-			case 4:report=new InventoryReport(); break;
-			case 5:orderReport=new OrderOnQueueReportControl(); break;
+			case 1:report=new ProductReport(); break;
+			case 2:scrapReport=new ScrapReportControl(); break;
+			case 3:report=new InventoryReport(); break;
+			case 4:orderReport=new OrderOnQueueReportControl(); break;
 		}
 		in.close();
 	}

@@ -33,11 +33,6 @@ public class OrdersOnQueue extends Report {
 		this.locationType=location.getLocationType();
 	}
 	
-	@Override
-	public String generateReport(){
-		return "";
-	}
-	
 	public void printReport(){
 		System.out.println(reportName);
 		for(Order order: orders){

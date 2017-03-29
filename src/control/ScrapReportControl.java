@@ -1,6 +1,10 @@
 package control;
 import employee.Employee;
+import inventory.Inventory;
 import inventory.Item;
+import report.Report;
+import report.ReportBuilder;
+import report.ReportFactory;
 import Database.Database;
 import java.util.*;
 
@@ -11,17 +15,33 @@ public class ScrapReportControl {
 	private HashMap<String, String> selectedParameters;
 	private ArrayList<String> columnTitles;
 	private String columnTitleForSorting;
+	private ReportFactory factory;
+	private Report report;
 	
 	ScrapReportControl(){
+		factory=new ReportFactory();
+		db=new Database();
+		getScrap();
 		
+		String name="Scrap Report";
+		report=new ReportBuilder(factory).
+				listOfObjects(listOfScrap).
+				reportName(name).
+				build();
+		report.printReport();
 	}
 	
 	public void getScrap(){
-		//items=new ArrayList<Item>();
-		//int id=Integer.parseInt(listOfItems.get(0).get(0));
-		//String name=listOfItems.get(0).get(1);
-		//item=new Item(name,id);
-		//items.add(item);
+		columnTitles=new ArrayList<String>();
+		columnTitles.add("scraplogID");
+		columnTitles.add("orderID");
+		columnTitles.add("time");
+		
+		columnTitleForSorting="scraplogID";
+		
+		selectedParameters=new HashMap<String, String>();
+		selectedParameters.put("1","1");
+		getScrapFromDatabase();
 	}
 	
 	public void getScrapFromDatabase(){

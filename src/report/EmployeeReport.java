@@ -7,8 +7,7 @@ public class EmployeeReport extends Report{
 		System.out.println("Employee Information");
 	}
 	
-	@Override
-	public String generateReport(){
-		return "query";
+	public void printReport(){
+		
 	}
 }

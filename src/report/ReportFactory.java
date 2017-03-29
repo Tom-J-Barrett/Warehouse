@@ -7,9 +7,6 @@ public class ReportFactory {
 		if(type=="Order Report"){
 			report=new OrdersOnQueue(b);
 		}
-		else if(type=="Employee Report"){
-			
-		}
 		else if(type=="Product Report"){
 			
 		}

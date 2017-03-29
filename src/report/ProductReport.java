@@ -7,8 +7,7 @@ public class ProductReport extends Report {
 		System.out.println("Product Information");
 	}
 	
-	@Override
-	public String generateReport(){
-		return "query";
+	public void printReport(){
+		
 	}
 }

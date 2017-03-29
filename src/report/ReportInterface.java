@@ -1,5 +1,5 @@
 package report;
 
 public interface ReportInterface {
-	public String generateReport();
+	public void printReport();
 }

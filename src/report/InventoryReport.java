@@ -7,8 +7,7 @@ public class InventoryReport extends Report {
 		System.out.println("Inventory Information");
 	}
 	
-	@Override
-	public String generateReport(){
-		return "query";
+	public void printReport(){
+		
 	}
 }
