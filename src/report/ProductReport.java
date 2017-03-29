@@ -3,12 +3,15 @@ package report;
 public class ProductReport implements Report{
 	private String reportName;
 
+	public ProductReport(ReportBuilder b){
+		this.reportName=b.reportName;
+	}
+	
 	public ProductReport(){
-		this.reportName="Product Report";
-		System.out.println("Product Information");
+
 	}
 	
 	public void printReport(){
-		
+		System.out.println(reportName);
 	}
 }

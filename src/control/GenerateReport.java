@@ -1,7 +1,6 @@
 package control;
 import java.util.*;
 
-import report.EmployeeReport;
 import report.InventoryReport;
 import report.ProductReport;
 import report.Report;
