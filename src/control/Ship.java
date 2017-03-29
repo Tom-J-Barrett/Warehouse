@@ -56,13 +56,11 @@ public class Ship {
 	}
 	
 	public void shipOrder(){
-		System.out.println("ship order");
 		shipment=new Shipment(location,orderToShip,orderToShip.getShipTo());
 		updateDatabase(shipment);
 	}
 	
 	public void createItems(){
-		System.out.println("create items");
 		items=new ArrayList<Item>();
 		int id=Integer.parseInt(listOfItems.get(0).get(0));
 		String name=listOfItems.get(0).get(1);
@@ -71,7 +69,6 @@ public class Ship {
 	}
 	
 	public void createProduct(){
-		System.out.println("create product");
 		products=new ArrayList<Product>();
 		String name=listOfProducts.get(0).get(2);
 		int id=Integer.parseInt(listOfProducts.get(0).get(0));
@@ -80,7 +77,6 @@ public class Ship {
 	}
 	
 	public void createOrder(){
-		System.out.println("create order");
 		//List<Product> products2, int orderID, String shipTo
 		int id=Integer.parseInt(listOfOrdersToShip.get(index).get(0));
 		String shipTo="Address";
@@ -135,7 +131,6 @@ public class Ship {
 	}
 	
 	public void getItems(){
-		System.out.println("get items");
 		selectedParameters3=new HashMap<String, String>();
 		String x=listOfProducts.get(0).get(0);
 		selectedParameters3.put("ItemID",x);
