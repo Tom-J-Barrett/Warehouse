@@ -108,6 +108,7 @@ public void createItems(){
 	}
 	
 	public void createInventory(){
+		inventory=new ArrayList<Inventory>();
 		for(int i=0;i<inventoryList.size();i++){
 			selectedParametersItem=new HashMap<String, String>();
 			String x=inventoryList.get(i).get(1);
@@ -117,8 +118,7 @@ public void createItems(){
 			columnTitlesItem.add("ItemName");
 			columnTitleForSortingItem="ItemID";
 			getInventoryItemsFromDatabase();
-			
-			inventory=new ArrayList<Inventory>();
+		
 			String loc=inventoryList.get(i).get(2);
 			String name=listOfItems.get(0).get(1);
 			int id=Integer.parseInt(listOfItems.get(0).get(0));
