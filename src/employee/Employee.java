@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class Employee
+public abstract class Employee
 {
     private String username;
     private String password;
@@ -20,9 +20,8 @@ public class Employee
         this.surname = surname;
         this.role = role;
     }
-    public Employee()
-    {
-    	;
+    public Employee(){
+    	
     }
 	public String toString()
     {

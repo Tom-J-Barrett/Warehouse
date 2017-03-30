@@ -4,7 +4,7 @@ public class InventoryOutLocation extends Location {
 	private int locationID;
 	private String locationType;
 
-	InventoryOutLocation(int locationID, String locationType){
+	public InventoryOutLocation(int locationID, String locationType){
 		this.locationID=locationID;
 		this.locationType=locationType;
 	}

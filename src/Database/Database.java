@@ -157,7 +157,7 @@ public class Database
 			List<List<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
 			currentStatement.close();
 			connection.close();
-			System.out.println(sqlStatement.toString());
+			//System.out.println(sqlStatement.toString());
 			return retrievedRows;
 		}
 		catch(Exception error)

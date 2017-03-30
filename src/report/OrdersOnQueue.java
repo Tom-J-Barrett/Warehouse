@@ -7,6 +7,7 @@ import inventory.Item;
 import inventory.Order;
 import inventory.Product;
 import location.Location;
+import warehouse.IntelligentInventoryPlacement;
 
 public class OrdersOnQueue implements Report{
 
@@ -15,11 +16,9 @@ public class OrdersOnQueue implements Report{
 	private List<Item> items;
 	private List<Inventory> inventory;
 	private Location location;
-	//private Order order;
+	private IntelligentInventoryPlacement placement;
 	private int locationID=0;
 	private String locationType;
-//	private List<Movement> movements;
-	//private Employee employee;
 	private Product product;
 	private Item item;
 	private Item item2;
@@ -49,22 +48,27 @@ public class OrdersOnQueue implements Report{
 			System.out.println("		Item ID: "+ item2.getItemName());
 			boolean itemC=false;
 			boolean item2C=false;
+			placement=new IntelligentInventoryPlacement();
 			for(Inventory inven: inventory){
-				if((inven.getItem().getItemID()==item.getItemID())){
+				if((inven.getItem().getItemID()==item.getItemID()) && itemC==false){
 					itemC=true;
 					System.out.println("Collect " +item.getItemName() + " from Location " + inven.getLocation().getLocationID());
+					System.out.println("Place "+ item.getItemName()+ " in location "+ placement.placeInventory(item).getLocationID()+".");
 				}
-				else if((inven.getItem().getItemID()==item2.getItemID())){
+				else if((inven.getItem().getItemID()==item2.getItemID())&& item2C==false){
 					item2C=true;
 					System.out.println("Collect " +item2.getItemName() + " from Location " + inven.getLocation().getLocationID());
+					System.out.println("Place "+ item2.getItemName()+ " in location "+ placement.placeInventory(item2).getLocationID()+".");
 				}
 			}
-			if(itemC=false){
+			if(itemC==false){
 				System.out.println("We are our of stock of item "+ item.getItemName());
 			}
-			else if(item2C=false){
+			else if(item2C==false){
 				System.out.println("We are our of stock of item "+ item2.getItemName());
 			}
+			
+			System.out.println();
 		}
 	}
 	
