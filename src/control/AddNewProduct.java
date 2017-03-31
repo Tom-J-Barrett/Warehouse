@@ -91,5 +91,4 @@ public class AddNewProduct {
 		db.insertTableRow("product", insertData);
 		System.out.println("Added " +product);
 	}
-	
 }

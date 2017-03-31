@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import org.pushingpixels.flamingo.api.common.*;
 import org.pushingpixels.flamingo.api.common.icon.*;
 import org.pushingpixels.flamingo.api.ribbon.*;
@@ -56,11 +58,18 @@ public class Component
     protected JTable createTable()
     {
         JTable aTable = new JTable();
-        aTable.setFont(font);
+        //aTable.setFont(font);
         aTable.setCellSelectionEnabled(true);
         aTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         aTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         return aTable;
+    }
+    protected JScrollPane createTableWithScrollPane()
+    {
+    	JTable aTable = createTable();
+    	JScrollPane aScrollPane = new JScrollPane(aTable);
+		aTable.setFillsViewportHeight(true);
+		return aScrollPane;
     }
     protected JTextField createDisabledTextField(String text)
     {

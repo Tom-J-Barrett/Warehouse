@@ -21,6 +21,10 @@ public class PortalComponent extends Component
 		this.aPortalFrame.setRibbonFrame(portalFrame);
 		SwingUtilities.invokeLater(() -> createPortal());
 	}
+	public void updateComponent(JPanel aComponent)
+	{
+		observable.changeData(aComponent);
+	}
 	private void createPortal()
 	{
 		JRibbonBand userActionsBand = createRibbonBand("User Actions");
@@ -39,8 +43,27 @@ public class PortalComponent extends Component
 			});
 			userActionsBand.addCommandButton(aButton, RibbonElementPriority.TOP);
 		}
-		RibbonTask aTask = createRibbonTask("User Actions", new JRibbonBand[]{userActionsBand});
-		portalFrame.getRibbon().addTask(aTask);
+		RibbonTask userActionsTask = createRibbonTask("User Actions", new JRibbonBand[]{userActionsBand});
+		JRibbonBand manageProductsBand = createRibbonBand("Manage Products");
+		JCommandButton addNewProductCommandButton = createCommandButton("Add New Product");
+		addNewProductCommandButton.addActionListener(x ->
+		{
+			ProductComponent addNewProductComponent = new ProductComponent(this);
+			addNewProductComponent.createAddProductPanel();
+			observable.changeData(addNewProductComponent.getPanel());
+		});
+		manageProductsBand.addCommandButton(addNewProductCommandButton, RibbonElementPriority.TOP);
+		JCommandButton viewExistingProductsCommandButton = createCommandButton("View Existing Products");
+		viewExistingProductsCommandButton.addActionListener(x ->
+		{
+			ProductComponent viewExistingProductsComponent = new ProductComponent(this);
+			viewExistingProductsComponent.createProductsPanel();
+			observable.changeData(viewExistingProductsComponent.getPanel());
+		});
+		manageProductsBand.addCommandButton(viewExistingProductsCommandButton, RibbonElementPriority.TOP);
+		RibbonTask manageProductsTask = createRibbonTask("Manage Products", new JRibbonBand[]{manageProductsBand});
+		portalFrame.getRibbon().addTask(userActionsTask);
+		portalFrame.getRibbon().addTask(manageProductsTask);
 		RibbonApplicationMenu aRibbonApplicationMenu = new RibbonApplicationMenu();
 		aRibbonApplicationMenu.addFooterEntry(createFooterApplicationMenuEntry("Log Out", x -> 
 		{
