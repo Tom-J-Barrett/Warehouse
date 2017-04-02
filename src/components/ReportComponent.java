@@ -48,6 +48,7 @@ public class ReportComponent extends Component {
 	public void createReportPanel()
 	{
 		reportPanel = new JPanel(new GridLayout(1, 1));
+		
 		//reportPanel.add(createProductsTable());
 		portalComponent.updateComponent(reportPanel);
 	}
@@ -77,8 +78,10 @@ public class ReportComponent extends Component {
 		OrderOnQueueReportControl rep=genReport.returnReport();
 		String report=rep.returnReport();	
 		//rep.returnStr();
-		reportPanel.add(createLabel(report));
+		
 		System.out.println(report);
+		reportPanel = new JPanel(new GridLayout(1, 1));
+		reportPanel.add(createLabel(report));
 		portalComponent.updateComponent(reportPanel);
 	}
 }

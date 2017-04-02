@@ -74,42 +74,44 @@ public class OrdersOnQueue implements Report{
 	
 	public String reportString(){
 		String report="";
-		report+=reportName+"\n";
+		report+="<html>";
+		report+="<br>"+reportName+"</br>\n";
 		for(Order order: orders){
 			product=order.getProducts().get(0);
 			item=product.getItems().get(0);
 			item2=product.getItems().get(1);
-			report+=("Order : "+ order.getOrderID()+"\n");
-			report+=("	Product ID: "+ product.getProductID()+"\n");
-			report+=("	Product Name: "+ product.getProductName()+"\n");
-			report+=("		Item ID: "+ item.getItemID()+"\n");
-			report+=("		Item ID: "+ item.getItemName()+"\n");
-			report+=("		Item ID: "+ item2.getItemID()+"\n");
-			report+=("		Item ID: "+ item2.getItemName()+"\n");
+			report+=("<br>Order : "+ order.getOrderID()+"</br>\n");
+			report+=("<br>	Product ID: "+ product.getProductID()+"</br>\n");
+			report+=("<br>	Product Name: "+ product.getProductName()+"</br>\n");
+			report+=("<br>		Item ID: "+ item.getItemID()+"</br>\n");
+			report+=("<br>		Item ID: "+ item.getItemName()+"</br>\n");
+			report+=("<br>		Item ID: "+ item2.getItemID()+"</br>\n");
+			report+=("<br>		Item ID: "+ item2.getItemName()+"</br>\n");
 			boolean itemC=false;
 			boolean item2C=false;
 			placement=new IntelligentInventoryPlacement();
 			for(Inventory inven: inventory){
 				if((inven.getItem().getItemID()==item.getItemID()) && itemC==false){
 					itemC=true;
-					report+=("Collect " +item.getItemName() + " from Location " + inven.getLocation().getLocationID()+"\n");
-					report+=("Place "+ item.getItemName()+ " in location "+ placement.placeInventory(item).getLocationID()+"."+"\n");
+					report+=("<br>Collect " +item.getItemName() + " from Location " + inven.getLocation().getLocationID()+"</br>\n");
+					report+=("<br>Place "+ item.getItemName()+ " in location "+ placement.placeInventory(item).getLocationID()+"."+"</br>\n");
 				}
 				else if((inven.getItem().getItemID()==item2.getItemID())&& item2C==false){
 					item2C=true;
-					report+=("Collect " +item2.getItemName() + " from Location " + inven.getLocation().getLocationID()+"\n");
-					report+=("Place "+ item2.getItemName()+ " in location "+ placement.placeInventory(item2).getLocationID()+"."+"\n");
+					report+=("<br>Collect " +item2.getItemName() + " from Location " + inven.getLocation().getLocationID()+"</br>\n");
+					report+=("<br>Place "+ item2.getItemName()+ " in location "+ placement.placeInventory(item2).getLocationID()+"."+"</br>\n");
 				}
 			}
 			if(itemC==false){
-				report+=("We are our of stock of item "+ item.getItemName()+"\n");
+				report+=("<br>We are our of stock of item "+ item.getItemName()+"</br>\n");
 			}
 			else if(item2C==false){
-				report+=("We are our of stock of item "+ item2.getItemName()+"\n");
+				report+=("<br>We are our of stock of item "+ item2.getItemName()+"</br>\n");
 			}
 			
-			report+="\n";
+			report+="<br>\n</br>";
 		}
+		report+="</html>";
 		return report;
 	}
 	
