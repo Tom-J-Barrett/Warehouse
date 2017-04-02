@@ -84,6 +84,10 @@ public class OrderOnQueueReportControl {
 		return report.reportString();
 	}
 	
+	public void returnStr(){
+		System.out.println(report.reportString());
+	}
+	
 	public void createItems(){
 		
 		int id=Integer.parseInt(listOfItems.get(0).get(0));

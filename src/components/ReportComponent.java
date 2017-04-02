@@ -1,6 +1,8 @@
 package components;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,8 +23,10 @@ import Database.Database;
 import Database.Utilities;
 import control.GenerateReport;
 import control.LogIn;
+import control.OrderOnQueueReportControl;
 import inventory.Item;
 import inventory.Product;
+import report.Report;
 
 public class ReportComponent extends Component {
 	private JPanel reportPanel;
@@ -59,14 +63,22 @@ public class ReportComponent extends Component {
 		JTextField reportID = createTextField("");
 		reportPanel.add(reportID);
 		JButton runReportButton = createButton("Run Report");
-		runReportButton.addActionListener(x -> 
-		{
-			int id=Integer.parseInt(reportID.getText());
-			String report=genReport.returnReport().returnReport();	
-			reportPanel.add(createLabel(report));
-			
-			portalComponent.updateComponent(reportPanel);
-		});
+		runReportButton.addActionListener(new ActionListener() { 
+			  public void actionPerformed(ActionEvent e) { 
+				  onClick(reportID);
+			  } 
+			} );
 		reportPanel.add(runReportButton);
+	}
+	
+	public void onClick(JTextField reportID){
+		int id=Integer.parseInt(reportID.getText());
+		genReport.getReport(id);
+		OrderOnQueueReportControl rep=genReport.returnReport();
+		String report=rep.returnReport();	
+		//rep.returnStr();
+		reportPanel.add(createLabel(report));
+		System.out.println(report);
+		portalComponent.updateComponent(reportPanel);
 	}
 }

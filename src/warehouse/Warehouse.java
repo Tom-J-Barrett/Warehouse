@@ -62,6 +62,4 @@ public class Warehouse{
 	public Item getItemToReceive(){
 		return itemToReceive;
 	}
-	
-	
 }
