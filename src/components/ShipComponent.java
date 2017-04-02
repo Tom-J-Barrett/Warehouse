@@ -39,11 +39,19 @@ public class ShipComponent extends Component {
 		shipPanel = new JPanel(new GridLayout(7, 1));
 		
 		JButton shipButton = createButton("Ship Order");
-		Object[][] columnValues = new Object[3][3];
-		Object[] columnTitles = new Object[3];
-		columnTitles[0]="HI";
-		columnTitles[0]="HII";
-		columnTitles[0]="HIII";
+		Ship ship=new Ship();
+		List<String> shipOrders=ship.orderColumnsToTable();
+		List<List<String>> ordersToSelect=ship.ordervaluesToTable();
+		Object[][] columnValues = new Object[ordersToSelect.size()][ordersToSelect.get(0).size()];
+		Object[] columnTitles = new Object[shipOrders.size()];
+		for(int i=0; i<columnTitles.length;i++){
+			columnTitles[i]=shipOrders.get(i);
+		}
+		for(int j=0;j<columnValues.length;j++){
+			for(int c=0;c<columnValues[0].length;c++){
+				columnValues[j][c]=ordersToSelect.get(j).get(c);
+			}
+		}
 		DefaultTableModel aModel = new DefaultTableModel(columnValues, columnTitles);
 		JTable orders = new JTable(aModel) 
 		{

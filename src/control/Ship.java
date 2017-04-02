@@ -96,7 +96,14 @@ public class Ship {
 	
 	public List<String> orderColumnsToTable(){
 		List<String> orders=new ArrayList<String>();
+		orders.add("OrderID");
+		orders.add("LocationID");
+		orders.add("Order Selected");
 		return orders;
+	}
+	
+	public List<List<String>> ordervaluesToTable(){
+		return listOfOrdersToShip;
 	}
 	
 	public void getOrders(){
