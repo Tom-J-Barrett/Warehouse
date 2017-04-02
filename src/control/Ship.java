@@ -42,17 +42,17 @@ public class Ship {
 	private int index;
 	private List<String> shipvalues;
 	
-	public Ship(Database db){
-		this.db=db;
+	public Ship(){
+		db=new Database();
 		location=LocationFactory.getLocation(4,"Ship Location");
 		getOrders();
-		displayOrders();
-		getProducts();
+		//displayOrders();
+		/*getProducts();
 		getItems();
 		createItems();
 		createProduct();
 		createOrder();
-		shipOrder();
+		shipOrder();*/
 	}
 	
 	public void shipOrder(){
@@ -92,6 +92,11 @@ public class Ship {
 		System.out.println("Please enter orderID: ");
 		orderID=Integer.parseInt(in.nextLine());
 		in.close();
+	}
+	
+	public List<String> orderColumnsToTable(){
+		List<String> orders=new ArrayList<String>();
+		return orders;
 	}
 	
 	public void getOrders(){
