@@ -73,6 +73,15 @@ public class PortalComponent extends Component
 		});
 		manageProductsBand.addCommandButton(runReportCommandButton, RibbonElementPriority.TOP);
 		
+		JCommandButton shipCommandButton = createCommandButton("Ship Order");
+		shipCommandButton.addActionListener(x ->
+		{
+			ShipComponent ship = new ShipComponent(this);
+			ship.createShipPanel();
+			observable.changeData(ship.getPanel());
+		});
+		manageProductsBand.addCommandButton(shipCommandButton, RibbonElementPriority.TOP);
+		
 		RibbonTask manageProductsTask = createRibbonTask("Manage Products", new JRibbonBand[]{manageProductsBand});
 		portalFrame.getRibbon().addTask(userActionsTask);
 		portalFrame.getRibbon().addTask(manageProductsTask);
