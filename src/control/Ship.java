@@ -55,6 +55,14 @@ public class Ship {
 		shipOrder();*/
 	}
 	
+	public void shipChain(Integer id){
+		getProducts(id);
+		getItems();
+		createItems();
+		createProduct();
+		createOrder();
+		shipOrder();
+	}
 	public void shipOrder(){
 		shipment=new Shipment(location,orderToShip,orderToShip.getShipTo());
 		updateDatabase(shipment);
@@ -98,7 +106,7 @@ public class Ship {
 		List<String> orders=new ArrayList<String>();
 		orders.add("OrderID");
 		orders.add("LocationID");
-		orders.add("Order Selected");
+		orders.add("Select Order");
 		return orders;
 	}
 	
@@ -121,7 +129,7 @@ public class Ship {
 		getOrdersFromDatabase();
 	}
 	
-	public void getProducts(){
+	public void getProducts(Integer orderID){
 		index=0;
 		for(int i=0;i<listOfOrdersToShip.size();i++){
 			if(Integer.parseInt(listOfOrdersToShip.get(i).get(0))==orderID){
