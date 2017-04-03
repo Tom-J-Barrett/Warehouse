@@ -31,7 +31,7 @@ public class IntelligentWarehouse {
 			switch(choice){
 			case 0:LogOnComponent aLogOnComponent=new LogOnComponent();break;
 			case 1:GenerateReport report=new GenerateReport();break;
-			case 2:Ship ship=new Ship(db);break;
+			case 2:Ship ship=new Ship();break;
 			case 3:LogIn login= new LogIn("cli");break;
 			case 4:AddNewProduct product=new AddNewProduct(db);break;
 			case 5:ReceiveInventory recInv=new ReceiveInventory(db);break;

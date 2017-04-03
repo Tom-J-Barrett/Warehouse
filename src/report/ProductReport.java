@@ -14,4 +14,8 @@ public class ProductReport implements Report{
 	public void printReport(){
 		System.out.println(reportName);
 	}
+	
+	public String reportString(){
+		return "";
+	}
 }

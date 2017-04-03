@@ -45,6 +45,7 @@ public class PortalComponent extends Component
 		}
 		RibbonTask userActionsTask = createRibbonTask("User Actions", new JRibbonBand[]{userActionsBand});
 		JRibbonBand manageProductsBand = createRibbonBand("Manage Products");
+		
 		JCommandButton addNewProductCommandButton = createCommandButton("Add New Product");
 		addNewProductCommandButton.addActionListener(x ->
 		{
@@ -53,6 +54,7 @@ public class PortalComponent extends Component
 			observable.changeData(addNewProductComponent.getPanel());
 		});
 		manageProductsBand.addCommandButton(addNewProductCommandButton, RibbonElementPriority.TOP);
+		
 		JCommandButton viewExistingProductsCommandButton = createCommandButton("View Existing Products");
 		viewExistingProductsCommandButton.addActionListener(x ->
 		{
@@ -61,6 +63,25 @@ public class PortalComponent extends Component
 			observable.changeData(viewExistingProductsComponent.getPanel());
 		});
 		manageProductsBand.addCommandButton(viewExistingProductsCommandButton, RibbonElementPriority.TOP);
+		
+		JCommandButton runReportCommandButton = createCommandButton("Run Report");
+		runReportCommandButton.addActionListener(x ->
+		{
+			ReportComponent runReportComponent = new ReportComponent(this);
+			runReportComponent.createSelectReportPanel();
+			observable.changeData(runReportComponent.getPanel());
+		});
+		manageProductsBand.addCommandButton(runReportCommandButton, RibbonElementPriority.TOP);
+		
+		JCommandButton shipCommandButton = createCommandButton("Ship Order");
+		shipCommandButton.addActionListener(x ->
+		{
+			ShipComponent ship = new ShipComponent(this);
+			ship.createShipPanel();
+			observable.changeData(ship.getPanel());
+		});
+		manageProductsBand.addCommandButton(shipCommandButton, RibbonElementPriority.TOP);
+		
 		RibbonTask manageProductsTask = createRibbonTask("Manage Products", new JRibbonBand[]{manageProductsBand});
 		portalFrame.getRibbon().addTask(userActionsTask);
 		portalFrame.getRibbon().addTask(manageProductsTask);

@@ -42,19 +42,27 @@ public class Ship {
 	private int index;
 	private List<String> shipvalues;
 	
-	public Ship(Database db){
-		this.db=db;
+	public Ship(){
+		db=new Database();
 		location=LocationFactory.getLocation(4,"Ship Location");
 		getOrders();
-		displayOrders();
-		getProducts();
+		//displayOrders();
+		/*getProducts();
+		getItems();
+		createItems();
+		createProduct();
+		createOrder();
+		shipOrder();*/
+	}
+	
+	public void shipChain(Integer id){
+		getProducts(id);
 		getItems();
 		createItems();
 		createProduct();
 		createOrder();
 		shipOrder();
 	}
-	
 	public void shipOrder(){
 		shipment=new Shipment(location,orderToShip,orderToShip.getShipTo());
 		updateDatabase(shipment);
@@ -94,6 +102,18 @@ public class Ship {
 		in.close();
 	}
 	
+	public List<String> orderColumnsToTable(){
+		List<String> orders=new ArrayList<String>();
+		orders.add("OrderID");
+		orders.add("LocationID");
+		orders.add("Select Order");
+		return orders;
+	}
+	
+	public List<List<String>> ordervaluesToTable(){
+		return listOfOrdersToShip;
+	}
+	
 	public void getOrders(){
 		locationID=location.getLocationID();
 
@@ -109,7 +129,7 @@ public class Ship {
 		getOrdersFromDatabase();
 	}
 	
-	public void getProducts(){
+	public void getProducts(Integer orderID){
 		index=0;
 		for(int i=0;i<listOfOrdersToShip.size();i++){
 			if(Integer.parseInt(listOfOrdersToShip.get(i).get(0))==orderID){

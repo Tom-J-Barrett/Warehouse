@@ -17,4 +17,8 @@ public class ScrapReport implements Report{
 			System.out.println("Order ID: "+scrap.get(i).get(1)+"	" +scrap.get(i).get(2));
 		}
 	}
+	
+	public String reportString(){
+		return "";
+	}
 }

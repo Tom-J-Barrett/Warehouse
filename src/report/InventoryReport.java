@@ -10,4 +10,8 @@ public class InventoryReport implements Report{
 	public void printReport(){
 		
 	}
+	
+	public String reportString(){
+		return "";
+	}
 }
