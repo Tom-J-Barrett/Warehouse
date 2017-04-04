@@ -12,10 +12,11 @@ import control.Scrap;
 public class IntelligentWarehouse {
 
 	public static void main(String[] args) {
-		boolean run=true;
+		LogOnComponent aLogOnComponent=new LogOnComponent();
+		//boolean run=true;
 		//while(run){
-			Database db = new Database();
-			System.out.println("What would you like to do?:");
+			//Database db = new Database();
+			/*System.out.println("What would you like to do?:");
 			System.out.println("0.GUI Under Construction");
 			System.out.println("1.Generate Report");
 			System.out.println("2.Ship");
@@ -39,7 +40,7 @@ public class IntelligentWarehouse {
 			case 7:run=false;break;
 			}
 			
-			in.close();
+			in.close();*/
 		//2}
 	}
 }

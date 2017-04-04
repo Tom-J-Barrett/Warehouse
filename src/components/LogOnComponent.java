@@ -12,6 +12,9 @@ public class LogOnComponent extends Component
 	public void createLogOnFrame()
 	{
 		JFrame frame = createFrame("Log On");
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 		JPanel panel = new JPanel(new GridLayout(5, 1));
 		panel.add(createLabel("Please enter your username"));
 		JTextField usernameTextField = createTextField("");

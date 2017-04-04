@@ -14,6 +14,9 @@ public class PortalFrame implements Observer
 	public void setRibbonFrame(JRibbonFrame aRibbonFrame)
 	{
 		this.portalFrame = aRibbonFrame;
+		portalFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		portalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		portalFrame.setVisible(true);
 	}
 	@Override
 	public void update(Observable anObservable, Object aPanel) 
