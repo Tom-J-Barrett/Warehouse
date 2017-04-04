@@ -58,6 +58,8 @@ public class OrderOnQueueReportControl {
 	private Inventory inven;
 	private ReportFactory factory;
 	private String or;
+	private List<String> tableTitles;
+	private List<String> joinConditions;
 	
 	
 	OrderOnQueueReportControl(){
@@ -152,15 +154,22 @@ public class OrderOnQueueReportControl {
 	public void getProducts(){
 		for(int i=0;i<listOfOrders.size();i++){
 			products=new ArrayList<Product>();
+			tableTitles=new ArrayList<String>();
+			tableTitles.add("product");
+			tableTitles.add("productitems");
+			
+			joinConditions=new ArrayList<String>();
+			joinConditions.add("product.ProductID");
+			joinConditions.add("productitems.ProductID");
+			
 			selectedParametersProduct=new HashMap<String, String>();
 			String x=listOfOrders.get(i).get(1);
-			selectedParametersProduct.put("ProductID", x);
+			selectedParametersProduct.put("productitems.ProductID",x);
 			
 			columnTitlesProduct=new ArrayList<String>();
-			columnTitlesProduct.add("ProductID");
-			columnTitlesProduct.add("ItemID");
+			columnTitlesProduct.add("productitems.ProductID");
+			columnTitlesProduct.add("productitems.ItemID");
 			columnTitlesProduct.add("ProductName");
-			columnTitlesProduct.add("Item2ID");
 			
 			columnTitleForSortingProduct="ProductName";
 			getProductsFromDatabase();
@@ -177,7 +186,6 @@ public class OrderOnQueueReportControl {
 		selectedParametersItem=new HashMap<String, String>();
 		String x=listOfProducts.get(j).get(1);
 		selectedParametersItem.put("ItemID",x);
-		or=listOfProducts.get(j).get(3);
 		columnTitlesItem=new ArrayList<String>();
 		columnTitlesItem.add("ItemID");
 		columnTitlesItem.add("ItemName");
@@ -200,7 +208,7 @@ public class OrderOnQueueReportControl {
 	}
 	
 	public void getItemsFromDatabase(){
-		listOfItems=db.getTableRowsOr("item", selectedParametersItem, columnTitlesItem, columnTitleForSortingItem, or);
+		listOfItems=db.getTableRows("item", selectedParametersItem, columnTitlesItem, columnTitleForSortingItem);
 	}
 	
 	public void getInventoryItemsFromDatabase(){
@@ -208,7 +216,7 @@ public class OrderOnQueueReportControl {
 	}
 	
 	public void getProductsFromDatabase(){
-		listOfProducts=db.getTableRows("product", selectedParametersProduct, columnTitlesProduct, columnTitleForSortingProduct);
+		listOfProducts=db.getJoinedTableRows(tableTitles,joinConditions,selectedParametersProduct, columnTitlesProduct, columnTitleForSortingProduct);
 	}
 	
 	public void getOrdersFromDatabase(){
