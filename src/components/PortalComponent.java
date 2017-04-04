@@ -47,7 +47,6 @@ public class PortalComponent extends Component
 			}
 		}
 		userActionsTask = createRibbonTask("User Actions", new JRibbonBand[]{userActionsBand});
-		
 		portalFrame.getRibbon().addTask(userActionsTask);
 		//portalFrame.getRibbon().addTask(manageProductsTask);
 		RibbonApplicationMenu aRibbonApplicationMenu = new RibbonApplicationMenu();

@@ -79,6 +79,7 @@ public class OrderOnQueueReportControl {
 				reportName(name).
 				location(location).
 				build();
+		System.out.println("14");
 		//report.printReport();
 	}
 	
@@ -94,12 +95,8 @@ public class OrderOnQueueReportControl {
 		
 		int id=Integer.parseInt(listOfItems.get(0).get(0));
 		String name=listOfItems.get(0).get(1);
-		int id2=Integer.parseInt(listOfItems.get(1).get(0));
-		String name2=listOfItems.get(1).get(1);
 		item=new Item(name,id);
-		item2=new Item(name2,id2);
 		items.add(item);
-		items.add(item2);
 	}
 	
 	public void createProduct(){
@@ -174,19 +171,13 @@ public class OrderOnQueueReportControl {
 			columnTitlesProduct.add("ProductName");
 			
 			columnTitleForSortingProduct="ProductName";
-			System.out.println("3");
 			getProductsFromDatabase();
-			System.out.println("4");
+			items=new ArrayList<Item>();
 			for(int j=0;j<listOfProducts.size();j++){
-				items=new ArrayList<Item>();
-				System.out.println("5");
 				getItems(j);
-				System.out.println("9");
-				createProduct();
-				System.out.println("10");
 			}
+			createProduct();
 			createOrder(i);
-			System.out.println("11");
 		}
 	}
 	
@@ -199,11 +190,8 @@ public class OrderOnQueueReportControl {
 		columnTitlesItem.add("ItemName");
 		
 		columnTitleForSortingItem="ItemID";
-		System.out.println("6");
 		getItemsFromDatabase();
-		System.out.println("7");
 		createItems();
-		System.out.println("8");
 	}
 	
 	public void getInventory(){
