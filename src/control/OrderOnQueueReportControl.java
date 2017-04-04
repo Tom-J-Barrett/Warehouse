@@ -147,7 +147,9 @@ public class OrderOnQueueReportControl {
 		
 		selectedParametersOrder=new HashMap<String, String>();
 		selectedParametersOrder.put("1","1");
+		System.out.println("1");
 		getOrdersFromDatabase();
+		System.out.println("2");
 	}
 	
 	
@@ -172,13 +174,19 @@ public class OrderOnQueueReportControl {
 			columnTitlesProduct.add("ProductName");
 			
 			columnTitleForSortingProduct="ProductName";
+			System.out.println("3");
 			getProductsFromDatabase();
+			System.out.println("4");
 			for(int j=0;j<listOfProducts.size();j++){
 				items=new ArrayList<Item>();
+				System.out.println("5");
 				getItems(j);
+				System.out.println("9");
 				createProduct();
+				System.out.println("10");
 			}
 			createOrder(i);
+			System.out.println("11");
 		}
 	}
 	
@@ -191,8 +199,11 @@ public class OrderOnQueueReportControl {
 		columnTitlesItem.add("ItemName");
 		
 		columnTitleForSortingItem="ItemID";
+		System.out.println("6");
 		getItemsFromDatabase();
+		System.out.println("7");
 		createItems();
+		System.out.println("8");
 	}
 	
 	public void getInventory(){
