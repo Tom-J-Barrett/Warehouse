@@ -1,6 +1,7 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,27 +12,13 @@ import location.Location;
 import location.LocationFactory;
 
 public class ReceiveInventory {
-	Scanner in = new Scanner(System.in);
-	public ReceiveInventory(Database db){
-		Location location;
-		Item item;
-		String itemID, locationID, locationType;
-		int quantity;
-		System.out.println("Please enter Item ID:");
-		itemID = in.nextLine();
-		System.out.println("Please enter Location ID:");
-		locationID = in.nextLine();
-		System.out.println("Please enter Location Name:");
-		locationType = in.nextLine();
-		System.out.println("Please enter quantity:");
-		quantity = in.nextInt();
-		item = new Item("",Integer.parseInt(itemID));
-		location = LocationFactory.getLocation(Integer.parseInt(locationID), locationType);
-		Inventory inventory = new Inventory(item, location);
-		addToInventory(inventory, quantity, db);
+	private ArrayList<String> itemColumnsForTable = new ArrayList<String>();
+	private ArrayList<String> locationColumnsForTable = new ArrayList<String>();
+	Database db = new Database();
+	public ReceiveInventory(){
 	}
 
-	public void addToInventory(Inventory inventory, int quantity, Database db){
+	public void addToInventory(Inventory inventory, int quantity){
 		int counter =0;
 		ArrayList<String> insertData = new ArrayList<String>();
 		for(int i = 0; i < quantity; i++){
@@ -52,6 +39,37 @@ public class ReceiveInventory {
 		insertData.add(itemID);
 		insertData.add(locationID);
 		return insertData;
+	}
+	
+	public List<List<String>> getItems(){
+		List<List<String>> items;
+		ArrayList<String> columnTitles = new ArrayList<String>();
+		columnTitles.add("ItemID");
+		columnTitles.add("ItemName");
+		items = db.getTableRows("item", new HashMap<String, String>(), columnTitles, "ItemID");
+		return items;
+		
+	}
+	
+	public List<List<String>> getLocations(){
+		List<List<String>> locations;
+		ArrayList<String> columnTitles = new ArrayList<String>();
+		columnTitles.add("LocationID");
+		columnTitles.add("LocationType");
+		locations = db.getTableRows("locations", new HashMap<String, String>(), columnTitles, "LocationID");
+		return locations;
+	}
+	
+	public List<String> getItemColumnsForTable(){
+		itemColumnsForTable.add("ItemID");
+		itemColumnsForTable.add("ItemName");
+		return itemColumnsForTable;
+	}
+	
+	public List<String> getLocationColumnsForTable(){
+		locationColumnsForTable.add("LocationID");
+		locationColumnsForTable.add("LocationType");
+		return locationColumnsForTable;
 	}
 		
 }

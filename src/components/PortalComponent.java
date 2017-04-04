@@ -73,6 +73,15 @@ public class PortalComponent extends Component
 		});
 		manageProductsBand.addCommandButton(runReportCommandButton, RibbonElementPriority.TOP);
 		
+		JCommandButton receiveCommandButton = createCommandButton("Receive Inventory");
+		receiveCommandButton.addActionListener(x ->
+		{
+			ReceiveComponent receive = new ReceiveComponent(this);
+			receive.createReceivePanel();
+			observable.changeData(receive.getPanel());
+		});
+		manageProductsBand.addCommandButton(receiveCommandButton, RibbonElementPriority.TOP);
+				
 		JCommandButton shipCommandButton = createCommandButton("Ship Order");
 		shipCommandButton.addActionListener(x ->
 		{
