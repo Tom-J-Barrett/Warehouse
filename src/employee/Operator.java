@@ -16,9 +16,7 @@ public class Operator extends Employee
     public LinkedHashMap<Integer, List<String>> menu()
     {
         LinkedHashMap<Integer, List<String>> menuItems = new LinkedHashMap<>();
-        menuItems.put(1, new ArrayList<>(Arrays.asList("1. Use Inventory", "Use Inventory Menu Item Selected")));
-        menuItems.put(2, new ArrayList<>(Arrays.asList("2. View Orders To Be Made", "View Orders To Be Made Menu Item Selected")));
-        menuItems.put(3, new ArrayList<>(Arrays.asList("3. Move To QI Production", "Move To QI Production Menu Item Selected")));
+        menuItems.put(1, new ArrayList<>(Arrays.asList("1. Report", "Report Menu Item Selected")));
         return menuItems;
     }
 }
