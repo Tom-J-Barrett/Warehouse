@@ -72,7 +72,14 @@ public class PortalComponent extends Component
 	}
 	
 	public void createButtonScrap(){
-			
+		JCommandButton scrapCommandButton = createCommandButton("Scrap");
+		scrapCommandButton.addActionListener(x ->
+		{
+			ScrapComponent scrapComponent = new ScrapComponent(this);
+			scrapComponent.createScrapPanel();
+			observable.changeData(scrapComponent.getPanel());
+		});
+		userActionsBand.addCommandButton(scrapCommandButton, RibbonElementPriority.TOP);	
 	}
 	
 	public void createButtonReport(){
