@@ -36,7 +36,7 @@ public class IntelligentWarehouse {
 			case 3:LogIn login= new LogIn("cli");break;
 			case 4:AddNewProduct product=new AddNewProduct(db);break;
 			case 5:ReceiveInventory recInv=new ReceiveInventory();break;
-			case 6:Scrap scrap=new Scrap(db);break;
+			case 6:Scrap scrap=new Scrap();break;
 			case 7:run=false;break;
 			}
 			
