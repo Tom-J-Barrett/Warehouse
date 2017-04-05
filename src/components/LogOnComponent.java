@@ -37,6 +37,7 @@ public class LogOnComponent extends Component
 		});
 		panel.add(submitButton);
 		frame.add(panel);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 	}
 }
