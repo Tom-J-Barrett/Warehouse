@@ -11,7 +11,7 @@ public class Database
     private String jdbcDriver = "com.mysql.jdbc.Driver";
     private String databaseUrl = "jdbc:mysql://localhost:3306/warehouse";
     private String user = "root";
-    private String password = "root";
+    private String password = "aicahsah";
     private String databaseTitle = "warehouse";
     private String orValue;
     public Database()

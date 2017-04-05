@@ -61,14 +61,14 @@ public class LogIn
             if(currentEmployeeDetails.get(2).equals(password))
             {
             	if(currentEmployeeDetails.get(5).equals("operator"))
-            		anEmployee = new Operator(currentEmployeeDetails.get(3), currentEmployeeDetails.get(4), currentEmployeeDetails.get(1),
-            								  currentEmployeeDetails.get(2));
+            		anEmployee = new Operator(currentEmployeeDetails.get(1),currentEmployeeDetails.get(2),currentEmployeeDetails.get(3),
+            				currentEmployeeDetails.get(4));
             	else if(currentEmployeeDetails.get(5).equals("manager"))
-            		anEmployee = new Manager(currentEmployeeDetails.get(3), currentEmployeeDetails.get(4), currentEmployeeDetails.get(1), 
-            				                 currentEmployeeDetails.get(2));
+            		anEmployee = new Manager(currentEmployeeDetails.get(1),currentEmployeeDetails.get(2),currentEmployeeDetails.get(3),
+            				currentEmployeeDetails.get(4));
             	else if(currentEmployeeDetails.get(5).equals("warehouseworker"))
-            		anEmployee = new WHWorker(currentEmployeeDetails.get(3), currentEmployeeDetails.get(4), currentEmployeeDetails.get(1),
-            				                  currentEmployeeDetails.get(2));
+            		anEmployee = new WHWorker(currentEmployeeDetails.get(1),currentEmployeeDetails.get(2),currentEmployeeDetails.get(3),
+            				currentEmployeeDetails.get(4));
             }
             else
             	errorMessage = "The password " + password + " is not a valid password for " + username;

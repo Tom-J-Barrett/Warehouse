@@ -69,7 +69,7 @@ public class Scrap {
 		products=new ArrayList<Product>();
 		String name=listOfProducts.get(0).get(1);
 		int id=Integer.parseInt(listOfProducts.get(0).get(0));
-		productForOrder=new Product(name,id);
+		productForOrder=new Product(items,name,id);
 		products.add(productForOrder);
 	}
 	
@@ -77,7 +77,7 @@ public class Scrap {
 		for(int i=0;i<listOfOrders.size();i++){
 			 x=listOfOrders.get(i).get(0);
 			 shipTo=listOfOrders.get(i).get(2);
-			System.out.println("Order: "+ x);
+			//System.out.println("Order: "+ x);
 		}
 		Scanner in=new Scanner(System.in);
 		System.out.println("Please enter orderID: ");

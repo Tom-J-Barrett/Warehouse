@@ -19,7 +19,7 @@ public class PortalComponent extends Component
 		this.anEmployee = anEmployee;
 		this.observable = new MessageObservable();
 		observable.addObserver(aPortalFrame);
-		portalFrame = createRibbonFrame("Portal");
+		portalFrame = createRibbonFrame(anEmployee.getFirstname()+" "+anEmployee.getSurname());
 		this.aPortalFrame.setRibbonFrame(portalFrame);
 		SwingUtilities.invokeLater(() -> createPortal());
 	}
