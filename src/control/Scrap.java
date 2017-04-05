@@ -11,7 +11,7 @@ import inventory.Product;
 
 public class Scrap {
 
-	private int orderID;
+	//private int orderID;
 	private Order order;
 
 	
@@ -40,36 +40,37 @@ public class Scrap {
 	private String x;
 	private String shipTo;
 	
-	public Scrap(Database db){
-		this.db=db;
+	public Scrap(){
+		db=new Database();
 		getOrders();
 		getProducts();
-		getItems();
-		displayOrders();
-		createItems();
+		//displayOrders();
 		createProduct();
-		scrapOrder();
+		//scrapChain(orderID);
 	}
 	
-	public void scrapOrder(){
+	
+	public void scrapChain(Integer orderID, String shipTo){
+		scrapOrder(orderID, shipTo);
+		/*getItems();
+		createItems();
+		createProduct();
+		createOrder();
+		shipOrder();*/
+	}
+	
+	public void scrapOrder(Integer orderID, String shipTo){
+		selectedParameters.put("OrderID", String.valueOf(orderID));	
 		order = new Order(products, orderID, shipTo);
-		updateDatabase(order);
+		updateDatabase(order, orderID);
 	}
 			
 	public void createProduct(){
 		products=new ArrayList<Product>();
-		String name=listOfProducts.get(0).get(2);
+		String name=listOfProducts.get(0).get(1);
 		int id=Integer.parseInt(listOfProducts.get(0).get(0));
-		productForOrder=new Product(items,name,id);
+		productForOrder=new Product(name,id);
 		products.add(productForOrder);
-	}
-	
-	public void createItems(){
-		items=new ArrayList<Item>();
-		int id=Integer.parseInt(listOfItems.get(0).get(0));
-		String name=listOfItems.get(0).get(1);
-		itemForOrder=new Item(name,id);
-		items.add(itemForOrder);
 	}
 	
 	public void displayOrders(){
@@ -80,8 +81,8 @@ public class Scrap {
 		}
 		Scanner in=new Scanner(System.in);
 		System.out.println("Please enter orderID: ");
-		orderID=Integer.parseInt(in.nextLine());
-		selectedParameters.put("OrderID", String.valueOf(orderID));		
+//		orderID=Integer.parseInt(in.nextLine());
+		//selectedParameters.put("OrderID", String.valueOf(orderID));		
 	}
 	
 	public void getOrders(){
@@ -104,52 +105,26 @@ public class Scrap {
 		
 		columnTitles2=new ArrayList<String>();
 		columnTitles2.add("ProductID");
-		columnTitles2.add("ItemID");
 		columnTitles2.add("ProductName");
 		
 		columnTitleForSorting2="ProductName";
 		getProductsFromDatabase();
 	}
 	
-	public void getItems(){
-		selectedParameters3=new HashMap<String, String>();
-		String x=listOfProducts.get(0).get(0);
-		selectedParameters3.put("ItemID",x);
-		
-
-		/*for(Iterator<Order> it = orders.iterator(); it.hasNext();){
-			Order order = it.next();
-			if(orderID == order.getOrderID()){
-				scrapOrders.add(order);
-				it.remove();
-			}	
-		}
-		
-		System.out.println("Orders : ");
-
-		for (Order order : orders) {
-			System.out.println(order.getOrderID());
-		}
-		
-		System.out.println("Scraped orders : ");
-
-		for (Order order : scrapOrders) {
-			System.out.println(order.getOrderID());
-		}
-
-		columnTitles3=new ArrayList<String>();
-		columnTitles3.add("ItemID");
-		columnTitles3.add("ItemName");
-*/
-		
-		columnTitleForSorting3="ItemID";
-		getItemsFromDatabase();
+	
+	public List<String> orderColumnsToTable(){
+		List<String> orders=new ArrayList<String>();
+		orders.add("OrderID");
+		orders.add("ProductID");
+		orders.add("LocationID");
+		orders.add("Select Order");
+		return orders;
 	}
 	
-	public void getItemsFromDatabase(){
-		listOfItems=db.getTableRows("item", selectedParameters3, columnTitles3, columnTitleForSorting3);
-	}
 	
+	public List<List<String>> ordervaluesToTable(){
+		return listOfOrders;
+	}
 
 	public void getProductsFromDatabase(){
 		listOfProducts=db.getTableRows("product", selectedParameters2, columnTitles2, columnTitleForSorting2);
@@ -159,7 +134,7 @@ public class Scrap {
 		listOfOrders=db.getTableRows("ordertable", selectedParameters, columnTitles, columnTitleForSorting);
 	}
 	
-	public void updateDatabase(Order order){
+	public void updateDatabase(Order order, Integer orderID){
 		
 		Date date = new Date();
 		Object param = new java.sql.Timestamp(date.getTime());
