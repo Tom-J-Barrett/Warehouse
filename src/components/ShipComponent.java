@@ -41,7 +41,7 @@ public class ShipComponent extends Component {
 		Object[][] columnValues = new Object[ordersToSelect.size()][3];
 		Object[] columnTitles = shipOrders.toArray();
 		for(int counter = 0; counter < ordersToSelect.size(); counter++)
-			columnValues[counter] = new Object[]{ordersToSelect.get(counter).get(0), ordersToSelect.get(counter).get(1), false};
+			columnValues[counter] = new Object[]{ordersToSelect.get(counter).get(0), ordersToSelect.get(counter).get(2), false};
 		aModel = new DefaultTableModel(columnValues, columnTitles);
 		JTable orders = new JTable(aModel) 
 		{
@@ -87,5 +87,3 @@ public class ShipComponent extends Component {
 		}
 	}
 }
-
-

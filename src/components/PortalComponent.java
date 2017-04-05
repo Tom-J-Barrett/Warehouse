@@ -11,6 +11,8 @@ public class PortalComponent extends Component
 	private PortalFrame aPortalFrame;
 	private Employee anEmployee;
 	private MessageObservable observable;
+	private RibbonTask userActionsTask;
+	private JRibbonBand userActionsBand;
 	public PortalComponent(PortalFrame aPortalFrame, Employee anEmployee)
 	{
 		this.aPortalFrame = aPortalFrame;
@@ -27,73 +29,26 @@ public class PortalComponent extends Component
 	}
 	private void createPortal()
 	{
-		JRibbonBand userActionsBand = createRibbonBand("User Actions");
+		userActionsBand = createRibbonBand("User Actions");
 		LinkedHashMap<Integer, List<String>> menuItems = anEmployee.menu();
+		JCommandButton aButton = createCommandButton("");
+		userActionsBand.addCommandButton(aButton, RibbonElementPriority.TOP);
 		for(Map.Entry<Integer, List<String>> aMenuItem : menuItems.entrySet())
 		{
 			String buttonCaption = aMenuItem.getValue().get(0);
 			buttonCaption = buttonCaption.substring(buttonCaption.indexOf('.') + 1);
-			JCommandButton aButton = createCommandButton(buttonCaption);
-			aButton.addActionListener(x -> 
-			{
-				JLabel aLabel = createLabel(aMenuItem.getValue().get(1));
-				JPanel aPanel = new JPanel(new GridLayout(1, 1));
-				aPanel.add(aLabel);
-				observable.changeData(aPanel);
-			});
-			userActionsBand.addCommandButton(aButton, RibbonElementPriority.TOP);
+			System.out.println(buttonCaption);
+			switch(buttonCaption){
+				case " Add New Product": createButtonAddNewProduct();break;
+				case " Delete/Scrap Units":createButtonScrap() ;break;
+				case " Report": createButtonReport();break;
+				case " Receive Inventory": createButtonReceive();break;
+				case " Ship Order": createButtonShip();break;
+			}
 		}
-		RibbonTask userActionsTask = createRibbonTask("User Actions", new JRibbonBand[]{userActionsBand});
-		JRibbonBand manageProductsBand = createRibbonBand("Manage Products");
-		
-		JCommandButton addNewProductCommandButton = createCommandButton("Add New Product");
-		addNewProductCommandButton.addActionListener(x ->
-		{
-			ProductComponent addNewProductComponent = new ProductComponent(this);
-			addNewProductComponent.createAddProductPanel();
-			observable.changeData(addNewProductComponent.getPanel());
-		});
-		manageProductsBand.addCommandButton(addNewProductCommandButton, RibbonElementPriority.TOP);
-		
-		JCommandButton viewExistingProductsCommandButton = createCommandButton("View Existing Products");
-		viewExistingProductsCommandButton.addActionListener(x ->
-		{
-			ProductComponent viewExistingProductsComponent = new ProductComponent(this);
-			viewExistingProductsComponent.createProductsPanel();
-			observable.changeData(viewExistingProductsComponent.getPanel());
-		});
-		manageProductsBand.addCommandButton(viewExistingProductsCommandButton, RibbonElementPriority.TOP);
-		
-		JCommandButton runReportCommandButton = createCommandButton("Run Report");
-		runReportCommandButton.addActionListener(x ->
-		{
-			ReportComponent runReportComponent = new ReportComponent(this);
-			runReportComponent.createSelectReportPanel();
-			observable.changeData(runReportComponent.getPanel());
-		});
-		manageProductsBand.addCommandButton(runReportCommandButton, RibbonElementPriority.TOP);
-		
-		JCommandButton receiveCommandButton = createCommandButton("Receive Inventory");
-		receiveCommandButton.addActionListener(x ->
-		{
-			ReceiveComponent receive = new ReceiveComponent(this);
-			receive.createReceivePanel();
-			observable.changeData(receive.getPanel());
-		});
-		manageProductsBand.addCommandButton(receiveCommandButton, RibbonElementPriority.TOP);
-				
-		JCommandButton shipCommandButton = createCommandButton("Ship Order");
-		shipCommandButton.addActionListener(x ->
-		{
-			ShipComponent ship = new ShipComponent(this);
-			ship.createShipPanel();
-			observable.changeData(ship.getPanel());
-		});
-		manageProductsBand.addCommandButton(shipCommandButton, RibbonElementPriority.TOP);
-		
-		RibbonTask manageProductsTask = createRibbonTask("Manage Products", new JRibbonBand[]{manageProductsBand});
+		userActionsTask = createRibbonTask("User Actions", new JRibbonBand[]{userActionsBand});
 		portalFrame.getRibbon().addTask(userActionsTask);
-		portalFrame.getRibbon().addTask(manageProductsTask);
+		//portalFrame.getRibbon().addTask(manageProductsTask);
 		RibbonApplicationMenu aRibbonApplicationMenu = new RibbonApplicationMenu();
 		aRibbonApplicationMenu.addFooterEntry(createFooterApplicationMenuEntry("Log Out", x -> 
 		{
@@ -103,5 +58,53 @@ public class PortalComponent extends Component
 		aRibbonApplicationMenu.addFooterEntry(createFooterApplicationMenuEntry("Exit", x -> {System.exit(0);}));
 		portalFrame.getRibbon().setApplicationMenu(aRibbonApplicationMenu);
 		portalFrame.setVisible(true);
+	}
+	
+	public void createButtonAddNewProduct(){
+		JCommandButton addNewProductCommandButton = createCommandButton("Add New Product");
+		addNewProductCommandButton.addActionListener(x ->
+		{
+			ProductComponent addNewProductComponent = new ProductComponent(this);
+			addNewProductComponent.createAddProductPanel();
+			observable.changeData(addNewProductComponent.getPanel());
+		});
+		userActionsBand.addCommandButton(addNewProductCommandButton, RibbonElementPriority.TOP);
+	}
+	
+	public void createButtonScrap(){
+			
+	}
+	
+	public void createButtonReport(){
+		JCommandButton runReportCommandButton = createCommandButton("Run Report");
+		runReportCommandButton.addActionListener(x ->
+		{
+			ReportComponent runReportComponent = new ReportComponent(this);
+			runReportComponent.createSelectReportPanel();
+			observable.changeData(runReportComponent.getPanel());
+		});
+		userActionsBand.addCommandButton(runReportCommandButton, RibbonElementPriority.TOP);
+	}
+	
+	public void createButtonReceive(){
+		JCommandButton receiveCommandButton = createCommandButton("Receive Inventory");
+		receiveCommandButton.addActionListener(x ->
+		{
+			ReceiveComponent receive = new ReceiveComponent(this);
+			receive.createReceivePanel();
+			observable.changeData(receive.getPanel());
+		});
+		userActionsBand.addCommandButton(receiveCommandButton, RibbonElementPriority.TOP);
+	}
+	
+	public void createButtonShip(){
+		JCommandButton shipCommandButton = createCommandButton("Ship Order");
+		shipCommandButton.addActionListener(x ->
+		{
+			ShipComponent ship = new ShipComponent(this);
+			ship.createShipPanel();
+			observable.changeData(ship.getPanel());
+		});
+		userActionsBand.addCommandButton(shipCommandButton, RibbonElementPriority.TOP);
 	}
 }

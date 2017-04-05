@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -76,11 +77,13 @@ public class ReportComponent extends Component {
 		int id=Integer.parseInt(reportID.getText());
 		genReport.getReport(id);
 		OrderOnQueueReportControl rep=genReport.returnReport();
-		String report=rep.returnReport();	
-		//rep.returnStr();
+		String report=rep.returnReport();
 		
-		System.out.println(report);
+		//JTextPane textPane = new JTextPane();
+		//textPane.setText(report);
 		reportPanel = new JPanel(new GridLayout(1, 1));
+		//JScrollPane aScrollPane = new JScrollPane();
+		//reportPanel.add(aScrollPane);
 		reportPanel.add(createLabel(report));
 		portalComponent.updateComponent(reportPanel);
 	}

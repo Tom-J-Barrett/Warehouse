@@ -41,6 +41,8 @@ public class Ship {
 	private List<List<String>> listOfItems;
 	private int index;
 	private List<String> shipvalues;
+	private List<String> tableTitles;
+	private List<String> joinConditions;
 	
 	public Ship(){
 		db=new Database();
@@ -57,11 +59,11 @@ public class Ship {
 	
 	public void shipChain(Integer id){
 		getProducts(id);
-		getItems();
+		/*getItems();
 		createItems();
 		createProduct();
 		createOrder();
-		shipOrder();
+		shipOrder();*/
 	}
 	public void shipOrder(){
 		shipment=new Shipment(location,orderToShip,orderToShip.getShipTo());
@@ -136,31 +138,47 @@ public class Ship {
 				index=i;
 			}
 		}
+		//List<String> tableTitles, List<String> joinConditions,
+       // HashMap<String, String> selectedParameters, List<String> columnTitles, String columnTitleForSorting)
+		tableTitles=new ArrayList<String>();
+		tableTitles.add("product");
+		tableTitles.add("productitems");
+		
+		joinConditions=new ArrayList<String>();
+		joinConditions.add("product.ProductID");
+		joinConditions.add("productitems.ProductID");
 		
 		selectedParameters2=new HashMap<String, String>();
 		String x=listOfOrdersToShip.get(index).get(1);
-		selectedParameters2.put("ProductID",x);
+		selectedParameters2.put("productitems.ProductID",x);
 		
 		columnTitles2=new ArrayList<String>();
-		columnTitles2.add("ProductID");
-		columnTitles2.add("ItemID");
+		columnTitles2.add("productitems.ProductID");
+		columnTitles2.add("productitems.ItemID");
 		columnTitles2.add("ProductName");
 		
 		columnTitleForSorting2="ProductName";
 		getProductsFromDatabase();
+		getItems();
+		createProduct();
+		createOrder();
+		shipOrder();
 	}
 	
 	public void getItems(){
-		selectedParameters3=new HashMap<String, String>();
-		String x=listOfProducts.get(0).get(0);
-		selectedParameters3.put("ItemID",x);
-		
-		columnTitles3=new ArrayList<String>();
-		columnTitles3.add("ItemID");
-		columnTitles3.add("ItemName");
-		
-		columnTitleForSorting3="ItemID";
-		getItemsFromDatabase();
+		for(int i=0;i<listOfProducts.size();i++){
+			selectedParameters3=new HashMap<String, String>();
+			String x=listOfProducts.get(i).get(1);
+			selectedParameters3.put("ItemID",x);
+			
+			columnTitles3=new ArrayList<String>();
+			columnTitles3.add("ItemID");
+			columnTitles3.add("ItemName");
+			
+			columnTitleForSorting3="ItemID";
+			getItemsFromDatabase();
+			createItems();
+		}
 	}
 	
 	public void getItemsFromDatabase(){
@@ -168,7 +186,7 @@ public class Ship {
 	}
 	
 	public void getProductsFromDatabase(){
-		listOfProducts=db.getTableRows("product", selectedParameters2, columnTitles2, columnTitleForSorting2);
+		listOfProducts=db.getJoinedTableRows(tableTitles,joinConditions, selectedParameters2, columnTitles2, columnTitleForSorting2);
 	}
 	
 	public void getOrdersFromDatabase(){
@@ -186,3 +204,4 @@ public class Ship {
 		System.out.println("Shipped Order: "+ shipment.getOrderID());
 	}
 }
+
