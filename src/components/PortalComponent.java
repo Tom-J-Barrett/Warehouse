@@ -61,6 +61,7 @@ public class PortalComponent extends Component
 	}
 	
 	public void createButtonAddNewProduct(){
+		System.out.println("New product?");
 		JCommandButton addNewProductCommandButton = createCommandButton("Add New Product");
 		addNewProductCommandButton.addActionListener(x ->
 		{

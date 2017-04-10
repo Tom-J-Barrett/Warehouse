@@ -9,7 +9,7 @@ public class PortalFrame implements Observer
 	private JPanel existingPanel;
 	public PortalFrame()
 	{
-		;
+		
 	}
 	public void setRibbonFrame(JRibbonFrame aRibbonFrame)
 	{
