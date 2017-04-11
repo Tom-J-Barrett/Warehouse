@@ -18,16 +18,9 @@ public class GenerateReport {
 	private Object selectedReport;
 	
 	public GenerateReport(){
-		//getReportFromUser();
 	}
 	
 	public void getReport(int x){
-		/*Scanner in=new Scanner(System.in);
-		System.out.println("What report would you like to run?: ");
-		System.out.println("1.Product Report");
-		System.out.println("2.Scrap Report");
-		System.out.println("3.Inventory Report");
-		System.out.println("4.Orders to be processed Report");*/
 		reportID=x;
 
 		switch(reportID){
@@ -43,9 +36,6 @@ public class GenerateReport {
 	}
 	
 	public void runReport(){
-		//reportName=report.getName();
-		//query=report.generateReport();
-		//queryDatabase(reportName,query);
 	}
 	
 	public void queryDatabase(String reportName, String query){

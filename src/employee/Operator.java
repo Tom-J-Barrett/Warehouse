@@ -11,7 +11,7 @@ public class Operator extends Employee
     }
     public Operator()
     {
-    	;
+    	
     }
     public LinkedHashMap<Integer, List<String>> menu()
     {

@@ -2,7 +2,7 @@ package control;
 
 import java.util.*;
 
-import Database.Database;
+import database.Database;
 import inventory.Item;
 import inventory.Product;
 
@@ -120,8 +120,9 @@ public class AddNewProduct {
 	}
 	public List<List<String>> getProducts()
 	{
+		System.out.println("Trying to get those products");
 		return db.getJoinedTableRows(new ArrayList<String>(Arrays.asList("productitems", "product", "item")), 
-		new ArrayList<String>(Arrays.asList("productitems.product", "product.ProductID", "productitems.item", "item.ItemID")), 
+		new ArrayList<String>(Arrays.asList("productitems.productID", "product.ProductID", "productitems.itemID", "item.ItemID")), 
 		new HashMap<>(), new ArrayList<String>(Arrays.asList("product.ProductID", "product.ProductName", "item.ItemID", "item.ItemName")), "product.ProductID");
 	}
 	public List<String> getProductTitles()

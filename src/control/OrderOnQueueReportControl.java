@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import Database.Database;
+import database.Database;
 import employee.Employee;
 import inventory.Inventory;
 import inventory.Item;
@@ -62,7 +62,7 @@ public class OrderOnQueueReportControl {
 	private List<String> joinConditions;
 	
 	
-	OrderOnQueueReportControl(){
+	public OrderOnQueueReportControl(){
 		inventory=new ArrayList<Inventory>();
 		factory=new ReportFactory();
 		db=new Database();
@@ -81,6 +81,10 @@ public class OrderOnQueueReportControl {
 				build();
 		System.out.println("14");
 		//report.printReport();
+	}
+	
+	public Report getReport(){
+		return report;
 	}
 	
 	public String returnReport(){

@@ -1,8 +1,9 @@
 package components;
 import java.awt.*;
 import javax.swing.*;
-import Database.Utilities;
+
 import control.LogIn;
+import database.Utilities;
 public class LogOnComponent extends Component
 {
 	public LogOnComponent()

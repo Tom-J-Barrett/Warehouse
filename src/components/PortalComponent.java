@@ -61,6 +61,7 @@ public class PortalComponent extends Component
 	}
 	
 	public void createButtonAddNewProduct(){
+		System.out.println("New product?");
 		JCommandButton addNewProductCommandButton = createCommandButton("Add New Product");
 		addNewProductCommandButton.addActionListener(x ->
 		{
@@ -86,7 +87,7 @@ public class PortalComponent extends Component
 		JCommandButton runReportCommandButton = createCommandButton("Run Report");
 		runReportCommandButton.addActionListener(x ->
 		{
-			ReportComponent runReportComponent = new ReportComponent(this);
+			ReportComponent runReportComponent = new ReportComponent(this,observable);
 			runReportComponent.createSelectReportPanel();
 			observable.changeData(runReportComponent.getPanel());
 		});

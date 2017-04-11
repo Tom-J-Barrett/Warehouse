@@ -1,7 +1,7 @@
 package control;
 import java.util.*;
 
-import Database.Database;
+import database.Database;
 
 import java.io.*;
 
