@@ -53,34 +53,89 @@ public class OrdersOnQueue implements Report{
 		tableValues.add(new ArrayList<String>());
 		tableValues.add(new ArrayList<String>());
 		tableValues.add(new ArrayList<String>());
+		tableValues.add(new ArrayList<String>());
+		tableValues.add(new ArrayList<String>());
 		tableValues.get(0).add("Order");
 		tableValues.get(1).add("Product");
-		tableValues.get(2).add("Item");
-		tableValues.get(3).add("Instruction");
+		tableValues.get(2).add("ProductName");
+		tableValues.get(3).add("Item");
+		tableValues.get(4).add("ItemName");
+		tableValues.get(5).add("Instruction");
 		for(int i=0;i<orders.size();i++){
 			product=orders.get(i).getProducts().get(0);
 			items=product.getItems();
 			int x=orders.get(i).getOrderID();
+			
 			tableValues.get(0).add(Integer.toString(x));
-			System.out.println("	Product ID: "+ product.getProductID());
-			System.out.println("	Product Name: "+ product.getProductName());
+			tableValues.get(1).add(" ");
+			tableValues.get(2).add(" ");
+			tableValues.get(3).add(" ");
+			tableValues.get(4).add(" ");
+			tableValues.get(5).add(" ");
+			
+			tableValues.get(1).add(Integer.toString(product.getProductID()));
+			tableValues.get(0).add(" ");
+			tableValues.get(2).add(" ");
+			tableValues.get(3).add(" ");
+			tableValues.get(4).add(" ");
+			tableValues.get(5).add(" ");
+			
+			
+			tableValues.get(2).add(product.getProductName());
+			tableValues.get(0).add(" ");
+			tableValues.get(1).add(" ");
+			tableValues.get(3).add(" ");
+			tableValues.get(4).add(" ");
+			tableValues.get(5).add(" ");
+			
 			for(Item item: items){
-				System.out.println("		Item ID: "+ item.getItemID());
-				System.out.println("		Item ID: "+ item.getItemName());
+				
+				tableValues.get(3).add(Integer.toString(item.getItemID()));
+				tableValues.get(0).add(" ");
+				tableValues.get(1).add(" ");
+				tableValues.get(2).add(" ");
+				tableValues.get(4).add(" ");
+				tableValues.get(5).add(" ");
+				
+				tableValues.get(4).add(item.getItemName());
+				tableValues.get(0).add(" ");
+				tableValues.get(1).add(" ");
+				tableValues.get(2).add(" ");
+				tableValues.get(3).add(" ");
+				tableValues.get(5).add(" ");
+				
 				boolean itemC=false;
 				placement=new IntelligentInventoryPlacement();
 				for(Inventory inven: inventory){
 					if((inven.getItem().getItemID()==item.getItemID()) && itemC==false){
 						itemC=true;
-						System.out.println("Collect " +item.getItemName() + " from Location " + inven.getLocation().getLocationID());
-						System.out.println("Place "+ item.getItemName()+ " in location "+ placement.placeInventory(item).getLocationID()+".");
+						
+						tableValues.get(5).add("Collect " +item.getItemName() + " from Location " + inven.getLocation().getLocationID()+".		Place "+ item.getItemName()+ " in location "+ placement.placeInventory(item).getLocationID()+".");
+						tableValues.get(0).add(" ");
+						tableValues.get(1).add(" ");
+						tableValues.get(2).add(" ");
+						tableValues.get(3).add(" ");
+						tableValues.get(4).add(" ");
 					}
 				}
 				if(itemC==false){
-					System.out.println("We are our of stock of item "+ item.getItemName());
+					
+					tableValues.get(5).add("We are our of stock of item "+ item.getItemName());
+					tableValues.get(0).add(" ");
+					tableValues.get(1).add(" ");
+					tableValues.get(2).add(" ");
+					tableValues.get(3).add(" ");
+					tableValues.get(4).add(" ");
+					
 				}
 			}
-			System.out.println();
+			tableValues.get(0).add(" ");
+			tableValues.get(1).add(" ");
+			tableValues.get(2).add(" ");
+			tableValues.get(3).add(" ");
+			tableValues.get(4).add(" ");
+			tableValues.get(5).add(" ");
+		
 		}
 	}
 	

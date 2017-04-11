@@ -40,13 +40,14 @@ public class OrderReportComponent extends Component {
 		report.generateTableValues();
 		List<List<String>> reportValues= report.getTable();
 		List<String> titles=new ArrayList<String>();
-		for(int i=0; i<reportValues.get(0).size();i++){
-			titles.add(reportValues.get(0).get(i));
+		for(int i=0; i<reportValues.size();i++){
+			titles.add(reportValues.get(i).get(0));
 		}
-		Object[][] columnValues = new Object[reportValues.size()][3];
+		Object[][] columnValues = new Object[reportValues.get(0).size()][10];
 		Object[] columnTitles = titles.toArray();
-		//for(int counter = 0; counter < ordersToSelect.size(); counter++)
-		//	columnValues[counter] = new Object[]{ordersToSelect.get(counter).get(0), ordersToSelect.get(counter).get(2), false};
+		for(int i = 1; i < reportValues.get(0).size(); i++){
+			columnValues[i] = new Object[]{reportValues.get(0).get(i),reportValues.get(1).get(i),reportValues.get(2).get(i),reportValues.get(3).get(i),reportValues.get(4).get(i),reportValues.get(5).get(i)};
+		}
 		aModel = new DefaultTableModel(columnValues, columnTitles);
 		JTable orders = new JTable(aModel) 
 		{
@@ -60,7 +61,13 @@ public class OrderReportComponent extends Component {
                     case 1:
                         return Integer.class;
                     case 2:
-                        return Boolean.class;
+                        return String.class;
+                    case 3:
+                        return Integer.class;
+                    case 4:
+                        return String.class;
+                    case 5:
+                        return String.class;
                     default:
                         return Boolean.class;
                 }
