@@ -5,8 +5,10 @@ import inventory.Item;
 import report.Report;
 import report.ReportBuilder;
 import report.ReportFactory;
-import Database.Database;
+
 import java.util.*;
+
+import database.Database;
 
 public class ScrapReportControl {
 	

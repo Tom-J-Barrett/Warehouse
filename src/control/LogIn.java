@@ -2,7 +2,8 @@ package control;
 import employee.*;
 
 import java.util.*;
-import Database.Database;
+
+import database.Database;
 public class LogIn
 {
     private Employee anEmployee;

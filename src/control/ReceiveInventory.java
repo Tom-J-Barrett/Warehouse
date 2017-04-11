@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import Database.Database;
+import database.Database;
 import inventory.Inventory;
 import inventory.Item;
 import location.Location;

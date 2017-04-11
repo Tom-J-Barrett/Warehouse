@@ -87,7 +87,7 @@ public class PortalComponent extends Component
 		JCommandButton runReportCommandButton = createCommandButton("Run Report");
 		runReportCommandButton.addActionListener(x ->
 		{
-			ReportComponent runReportComponent = new ReportComponent(this);
+			ReportComponent runReportComponent = new ReportComponent(this,observable);
 			runReportComponent.createSelectReportPanel();
 			observable.changeData(runReportComponent.getPanel());
 		});

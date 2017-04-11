@@ -1,8 +1,9 @@
 package components;
 import javax.swing.*;
 import javax.swing.table.*;
-import Database.*;
+
 import control.*;
+import database.*;
 import inventory.*;
 import java.awt.GridLayout;
 import java.util.*;
