@@ -15,7 +15,7 @@ public class ProductComponent extends Component
 	public ProductComponent(PortalComponent portalComponent)
 	{
 		this.portalComponent = portalComponent;
-		this.addNewProduct = new AddNewProduct(new Database(), "gui");
+		this.addNewProduct = new AddNewProduct();
 	}
 	public JPanel getPanel()
 	{

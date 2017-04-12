@@ -25,16 +25,16 @@ public class AddNewProduct {
 
 	private List<String> insertData;
 	
-	public AddNewProduct(Database db, String userType){
-		this.db=db;
-		if(userType == "cli")
+	public AddNewProduct(){
+		this.db=new Database();
+		/*if(userType == "cli")
 		{
 			getItems();
 			setID();
 			setName();
 			setItems();
 			addProduct();
-		}
+		}*/
 	}
 	
 	public void addProduct(){
