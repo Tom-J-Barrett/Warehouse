@@ -5,7 +5,23 @@ public class QIOutLocation extends Location {
 	private String locationType;
 	
 	QIOutLocation(int locationID, String locationType){
-		this.locationID=locationID;
-		this.locationType=locationType;
+		this.setLocationID(locationID);
+		this.setLocationType(locationType);
+	}
+
+	public String getLocationType() {
+		return locationType;
+	}
+
+	public void setLocationType(String locationType) {
+		this.locationType = locationType;
+	}
+
+	public int getLocationID() {
+		return locationID;
+	}
+
+	public void setLocationID(int locationID) {
+		this.locationID = locationID;
 	}
 }

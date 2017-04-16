@@ -26,6 +26,7 @@ public class ReceiveComponent extends Component{
 	private DefaultTableModel bModel;
 	private ReceiveInventory receive;
 	private int itemID;
+	private int locationID;
 
 	
 	public ReceiveComponent(PortalComponent portalComponent)
@@ -113,16 +114,28 @@ public class ReceiveComponent extends Component{
 	
 	public void onClick(){
 		itemID = 0;
+		locationID=0;
+		Location location = LocationFactory.getLocation(0, "");
+		Item item = new Item();
 		for(int counter = 0; counter < aModel.getRowCount(); counter++)
 		{
 			if(aModel.getValueAt(counter, 2).equals(true)){
-				itemID=Integer.parseInt(aModel.getValueAt(counter, 0).toString());
-				Item item = new Item("Yup", itemID);
-				Location location = LocationFactory.getLocation(1, "Yup");
-				Inventory inventory = new Inventory(item, location);
-				receive.addToInventory(inventory, 1);
-				JOptionPane.showMessageDialog(null, "Item "+ itemID+" has been added!");
+				itemID=(Integer.parseInt(aModel.getValueAt(counter, 0).toString()));
+				String itemName = aModel.getValueAt(counter, 1).toString();
+				item = new Item(itemName, itemID);
 			}
 		}
+		for(int i = 0; i < bModel.getRowCount(); i++)
+		{
+			if(bModel.getValueAt(i, 2).equals(true)){
+				locationID=(Integer.parseInt(bModel.getValueAt(i, 0).toString()));
+				String locationName = bModel.getValueAt(i, 1).toString();
+				location = LocationFactory.getLocation(locationID, locationName);
+				int yup = LocationFactory.getLocation(locationID, locationName).getLocationID();
+				JOptionPane.showMessageDialog(null, "Item added to inventory!");
+			}
+		}
+		Inventory inventory = new Inventory(item, location);
+		receive.addToInventory(inventory, 1);
 	}
 }

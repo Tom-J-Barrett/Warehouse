@@ -12,17 +12,18 @@ import location.Location;
 import location.LocationFactory;
 
 public class ReceiveInventory {
-	private ArrayList<String> itemColumnsForTable = new ArrayList<String>();
-	private ArrayList<String> locationColumnsForTable = new ArrayList<String>();
+	private List<String> itemColumnsForTable = new ArrayList<String>();
+	private List<String> locationColumnsForTable = new ArrayList<String>();
 	Database db = new Database();
 	public ReceiveInventory(){
 	}
 
 	public void addToInventory(Inventory inventory, int quantity){
 		int counter =0;
-		ArrayList<String> insertData = new ArrayList<String>();
+		List<String> insertData = new ArrayList<String>();
 		for(int i = 0; i < quantity; i++){
 			insertData = addDataToList(insertData, Integer.toString(inventory.getItem().getItemID()), Integer.toString(inventory.getLocation().getLocationID()), db);
+			System.out.println("Inventory:   Item: " + inventory.getItem().getItemID() + "   Location: " + inventory.getLocation().getLocationID());
 			counter++;
 			db.insertTableRow("inventory", insertData);
 		}
@@ -31,7 +32,7 @@ public class ReceiveInventory {
 		
 	}
 	
-	public ArrayList<String> addDataToList(ArrayList<String> insertData, String itemID, String locationID, Database db){
+	public List<String> addDataToList(List<String> insertData, String itemID, String locationID, Database db){
 		insertData.clear();
     	System.out.println("Yup");
 		insertData.add(Integer.toString((db.getMaxValueOfColumn("inventory", "inventoryID")+1)));
@@ -43,7 +44,7 @@ public class ReceiveInventory {
 	
 	public List<List<String>> getItems(){
 		List<List<String>> items;
-		ArrayList<String> columnTitles = new ArrayList<String>();
+		List<String> columnTitles = new ArrayList<String>();
 		columnTitles.add("ItemID");
 		columnTitles.add("ItemName");
 		items = db.getTableRows("item", new HashMap<String, String>(), columnTitles, "ItemID");
@@ -53,7 +54,7 @@ public class ReceiveInventory {
 	
 	public List<List<String>> getLocations(){
 		List<List<String>> locations;
-		ArrayList<String> columnTitles = new ArrayList<String>();
+		List<String> columnTitles = new ArrayList<String>();
 		columnTitles.add("LocationID");
 		columnTitles.add("LocationType");
 		locations = db.getTableRows("locations", new HashMap<String, String>(), columnTitles, "LocationID");
