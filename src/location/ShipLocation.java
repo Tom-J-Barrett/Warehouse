@@ -5,7 +5,23 @@ public class ShipLocation extends Location {
 	private String locationType;
 	
  	public ShipLocation(int locationID, String locationType){
-		this.locationID=123;
-		this.locationType="Ship";
+		this.setLocationID(locationID);
+		this.setLocationType(locationType);
+	}
+
+	public int getLocationID() {
+		return locationID;
+	}
+
+	public void setLocationID(int locationID) {
+		this.locationID = locationID;
+	}
+
+	public String getLocationType() {
+		return locationType;
+	}
+
+	public void setLocationType(String locationType) {
+		this.locationType = locationType;
 	}
 }
