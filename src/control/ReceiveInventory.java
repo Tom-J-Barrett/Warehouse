@@ -63,12 +63,14 @@ public class ReceiveInventory {
 	public List<String> getItemColumnsForTable(){
 		itemColumnsForTable.add("ItemID");
 		itemColumnsForTable.add("ItemName");
+		itemColumnsForTable.add("Select Item");
 		return itemColumnsForTable;
 	}
 	
 	public List<String> getLocationColumnsForTable(){
 		locationColumnsForTable.add("LocationID");
 		locationColumnsForTable.add("LocationType");
+		locationColumnsForTable.add("Select Location");
 		return locationColumnsForTable;
 	}
 		
