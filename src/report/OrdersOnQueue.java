@@ -22,8 +22,6 @@ public class OrdersOnQueue implements Report{
 	private int locationID=0;
 	private String locationType;
 	private Product product;
-	private Item item;
-	private Item item2;
 	private String reportName;
 	
 	public OrdersOnQueue(ReportBuilder b){

@@ -17,11 +17,11 @@ public class Product{
 		this.productID=productID;
 	}
 	
-	public ArrayList<Item> getItems(){
-		return (ArrayList<Item>) items;
+	public List<Item> getItems(){
+		return items;
 	}
 	
-	public void setItems(ArrayList<Item> items){
+	public void setItems(List<Item> items){
 		this.items=items;
 	}
 	

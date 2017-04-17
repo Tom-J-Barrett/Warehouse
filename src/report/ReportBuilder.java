@@ -53,17 +53,4 @@ public final class ReportBuilder<T> {
 		}
 		return factory.createReport(this,reportName);
 	}
-	
-	/*public OrdersOnQueue build(){
-		if(orders==null){
-			System.out.println("No list of orders");
-		}
-		if(location==null){
-			System.out.println("No location");
-		}
-		if(reportName==null){
-			System.out.println("No name");
-		}
-		return new OrdersOnQueue(this);
-	}*/
 }

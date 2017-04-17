@@ -24,7 +24,7 @@ public class Inventory{
 		return item;
 	}
 	
-	public void setLoaction(Location location)
+	public void setLocation(Location location)
 	{
 		this.location=location;
 	}
