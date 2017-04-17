@@ -139,7 +139,7 @@ public class Scrap {
 		Date date = new Date();
 		Object param = new java.sql.Timestamp(date.getTime());
 		shipvalues=new ArrayList<String>();
-		shipvalues.add(String.valueOf(orderID));
+		shipvalues.add(String.valueOf((db.getMaxValueOfColumn("scraplog", "scraplogID")+1)));
 		shipvalues.add(String.valueOf(orderID));
 		shipvalues.add(String.valueOf(param));
 		db.insertTableRow("scraplog", shipvalues);
