@@ -70,11 +70,11 @@ public class Utilities
             return new Date();
         }
     }
-    public static ArrayList<String> extractTextBetweenTags(String text, String openingPattern, String closingPattern)
+    public static List<String> extractTextBetweenTags(String text, String openingPattern, String closingPattern)
     {
         Pattern aPattern = Pattern.compile(openingPattern + ".*?" + closingPattern, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
         Matcher aMatcher = aPattern.matcher(text);
-        ArrayList<String> validMatches = new ArrayList<>();
+        List<String> validMatches = new ArrayList<>();
         while(aMatcher.find())
         {
             String textualContent = aMatcher.group();
@@ -86,11 +86,11 @@ public class Utilities
         }
         return validMatches;
     }
-    public static ArrayList<String> extractAttributeOfTags(String text, String pattern, String attribute)
+    public static List<String> extractAttributeOfTags(String text, String pattern, String attribute)
     {
         Pattern aPattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
         Matcher aMatcher = aPattern.matcher(text);
-        ArrayList<String> attributes = new ArrayList<>();
+        List<String> attributes = new ArrayList<>();
         while(aMatcher.find())
         {
             String currentTag = aMatcher.group();
