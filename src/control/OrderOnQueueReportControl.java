@@ -31,19 +31,19 @@ public class OrderOnQueueReportControl {
 	private Database db;
 	
 	private HashMap<String, String> selectedParametersOrder;
-	private ArrayList<String> columnTitlesOrder;
+	private List<String> columnTitlesOrder;
 	private String columnTitleForSortingOrder;
 	
 	private HashMap<String, String> selectedParametersProduct;
-	private ArrayList<String> columnTitlesProduct;
+	private List<String> columnTitlesProduct;
 	private String columnTitleForSortingProduct;
 	
 	private HashMap<String, String> selectedParametersItem;
-	private ArrayList<String> columnTitlesItem;
+	private List<String> columnTitlesItem;
 	private String columnTitleForSortingItem;
 	
 	private HashMap<String, String> selectedParametersInventory;
-	private ArrayList<String> columnTitlesInventory;
+	private List<String> columnTitlesInventory;
 	private String columnTitleForSortingInventory;
 
 	private List<List<String>> listOfOrders;
