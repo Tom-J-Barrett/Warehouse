@@ -79,7 +79,6 @@ public class ScrapComponent extends Component {
 	}
 	
 	public void onClick(){
-		//orderID=3;
 		for(int counter = 0; counter < aModel.getRowCount(); counter++)
 		{
 			if(aModel.getValueAt(counter, 3).equals(true)){

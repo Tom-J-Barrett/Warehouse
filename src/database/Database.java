@@ -69,7 +69,7 @@ public class Database
             addParametersToSQLStatement(selectedParameters, sqlStatement);
             if(columnTitleForSorting.length() > 0)
                 sqlStatement.append(" order by " + columnTitleForSorting + " asc");
-            System.out.println(sqlStatement.toString());
+        //    System.out.println(sqlStatement.toString());
             List<List<String>> retrievedRows = retrieveResults(sqlStatement.toString(), connection.createStatement());
             currentStatement.close();
             connection.close();
@@ -290,6 +290,7 @@ public class Database
             StringBuilder sqlStatement = new StringBuilder("delete from " + tableName);
             addParametersToSQLStatement(selectedParameters, sqlStatement);
             PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement.toString());
+            //System.out.println(sqlStatement.toString());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();

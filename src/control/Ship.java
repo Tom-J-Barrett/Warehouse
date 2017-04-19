@@ -194,14 +194,17 @@ public class Ship {
 	}
 	
 	public void updateDatabase(Shipment shipment){
-		System.out.println("update");
+		//System.out.println("update");
 		shipvalues=new ArrayList<String>();
 		int maximumValueOfColumn = db.getMaxValueOfColumn("shipment", "ShipmentID");
 		shipvalues.add(Integer.toString(maximumValueOfColumn+1));
 		shipvalues.add("1");
 		shipvalues.add(Integer.toString(shipment.getOrderID()));
 		db.insertTableRow("shipment", shipvalues);
-		System.out.println("Shipped Order: "+ shipment.getOrderID());
+		selectedParameters=new HashMap<String, String>();
+		selectedParameters.put("OrderID",(Integer.toString(shipment.getOrderID())));
+		db.removeTableRow("ordertable", selectedParameters);
+		//System.out.println("Shipped Order: "+ shipment.getOrderID());
 	}
 }
 

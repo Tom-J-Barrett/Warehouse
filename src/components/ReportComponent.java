@@ -23,26 +23,21 @@ import javax.swing.table.DefaultTableModel;
 import control.GenerateReport;
 import control.LogIn;
 import control.OrderOnQueueReportControl;
-import database.Database;
-import database.Utilities;
 import inventory.Item;
 import inventory.Product;
 import report.Report;
 
 public class ReportComponent extends Component {
 	private JPanel reportPanel;
-	private Database database;
 	private PortalComponent portalComponent;
 	private GenerateReport genReport;
 	private List<String> reports;
-	private Object selectedReport;
 	private MessageObservable observable;
 	
 	public ReportComponent(PortalComponent portalComponent,MessageObservable observable)
 	{
 		this.portalComponent = portalComponent;
 		this.observable=observable;
-		database = new Database();
 	}
 	public JPanel getPanel()
 	{
@@ -51,8 +46,6 @@ public class ReportComponent extends Component {
 	public void createReportPanel()
 	{
 		reportPanel = new JPanel(new GridLayout(1, 1));
-		
-		//reportPanel.add(createProductsTable());
 		portalComponent.updateComponent(reportPanel);
 	}
 	public void createSelectReportPanel()
@@ -77,15 +70,6 @@ public class ReportComponent extends Component {
 	
 	public void onClick(JTextField reportID){
 		int id=Integer.parseInt(reportID.getText());
-		//genReport.getReport(id);
-		//OrderOnQueueReportControl rep=genReport.returnReport();
-		//String report=rep.returnReport();
-		//JTextPane textPane = new JTextPane();
-		//textPane.setText(report);
-		//reportPanel = new JPanel(new GridLayout(1, 1));
-		//JScrollPane aScrollPane = new JScrollPane();
-		//reportPanel.add(aScrollPane);
-		//reportPanel.add(createLabel(report));
 		if(id==4){
 			OrderReportComponent comp=new OrderReportComponent(portalComponent);
 			comp.createOrderReportPanel();

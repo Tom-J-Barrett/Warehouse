@@ -3,7 +3,6 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import control.*;
-import database.*;
 import inventory.*;
 import java.awt.GridLayout;
 import java.util.*;

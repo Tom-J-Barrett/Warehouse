@@ -6,7 +6,6 @@ import database.Database;
 import inventory.Item;
 import inventory.Product;
 
-/*WORKING BUT STILL A PROBLEM WITH DUPLICATE IN DATABASE*/
 
 public class AddNewProduct {
 	private Product product;
@@ -27,14 +26,6 @@ public class AddNewProduct {
 	
 	public AddNewProduct(){
 		this.db=new Database();
-		/*if(userType == "cli")
-		{
-			getItems();
-			setID();
-			setName();
-			setItems();
-			addProduct();
-		}*/
 	}
 	
 	public void addProduct(){

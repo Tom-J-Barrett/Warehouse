@@ -58,7 +58,6 @@ public class Component
     protected JTable createTable()
     {
         JTable aTable = new JTable();
-        //aTable.setFont(font);
         aTable.setCellSelectionEnabled(true);
         aTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         aTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
